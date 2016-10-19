@@ -84,6 +84,8 @@ def get_player_bag( html_text, handle ):
 
 		try:
 			curr_val = fields_after_handle[ curr_idx ]
+			if 'Achievements' == curr_val:
+				break
 		except IndexError as i:
 			print( 'error with', curr_idx )
 			break
