@@ -131,11 +131,35 @@ def get_player_bag( html_text, handle ):
 	return player_bags
 
 import requests
-def main( handle, url ):
+def main( username, platform, region ):
 
+	if region:
+		count_sharp = len( username.split( '#' ) ) -1
+		if count_sharp == 0:
+			print( 'err: no number on PC battletag' )
+			print( 'aborting...' )
+			exit()
+		elif count_sharp > 1:
+			print( 'err: battletag has too many #' )
+			print( 'aborting...' )
+			exit()
+
+		name, number = username.split( '#' )
+		try:
+			n = int( number )
+		except ValueError as v:
+			print( 'err: given battletag has no number' )
+			exit()
+
+		url = 'https://playoverwatch.com/en-us/career/pc/' +region.lower() +'/' +name +'-' +number
+	
+	else:
+		name = username
+		url = 'https://playoverwatch.com/en-us/career/' +platform.lower() +'/' +username
+		
 	r = requests.get( url )
 	html_text = r.text
-	player_bags = get_player_bag( html_text, handle )
+	player_bags = get_player_bag( html_text, name )
 
 	bag_and_label = list()
 	bag_and_label.append( ( 'Quick Play', player_bags[ 0 ] ) )
@@ -148,20 +172,53 @@ def main( handle, url ):
 
 			for label, val in bag[ hero ]:
 				print( '\t\t{0} | {1}'.format( label, val ) )
-
 # ---
 
 def complain( prob_string ):
 	print( prob_string )
 	print( 'Aborting...' )
 
+# handle different platforms
 import sys
-# handle, url
-EXPECTED_NUM_ARGS = 2
 if __name__=='__main__':
-	if len( sys.argv[ 1: ] ) != EXPECTED_NUM_ARGS:
-		complain( 'usage: main.py BATTLE_TAG URL' )
+	MIN_ARG = 2
+	MAX_ARG = 3
+	region = None
+	if len( sys.argv[ 1: ] ) < MIN_ARG:
+		print( 'usage: main.py USERNAME(#NUMBER) PSN|XBL|( PC US|KR|EU )' )
+		print( 'aborting...' )
 		exit()
 
-	handle, url = sys.argv[ 1: ]
-	main( handle, url )
+	elif len( sys.argv[ 1: ] ) == MIN_ARG:
+
+		username = sys.argv[ 1 ]
+		platform = sys.argv[ 2 ]
+		if platform not in [ 'PSN', 'XBL' ]:
+			print( 'err: 2-argument argument 2 not PSN or XBL' )
+			print( 'usage: main.py USERNAME(#NUMBER) PSN|XBL|( PC US|KR|EU )' )
+			print( 'aborting...' )
+			exit()
+
+	elif len( sys.argv[ 1: ] ) == MAX_ARG:
+
+		username = sys.argv[ 1 ]
+		platform = sys.argv[ 2 ]
+		if platform != 'PC':
+			print( 'err: 3-argument argument 2 not PC' )
+			print( 'usage: main.py USERNAME(#NUMBER) PSN|XBL|( PC US|KR|EU )' )
+			print( 'aborting...' )
+			exit()
+		region = sys.argv[ 3 ]
+		if region not in [ 'US', 'KR', 'EU' ]:
+			print( 'err: 3-argument argument 3 not US, KR, or EU' )
+			print( 'usage: main.py USERNAME(#NUMBER) PSN|XBL|( PC US|KR|EU )' )
+			print( 'aborting...' )
+			exit()
+
+	else:
+		print( 'err: more than 3 arguments' )
+		print( 'usage: main.py USERNAME(#NUMBER) PSN|XBL|( PC US|KR|EU )' )
+		print( 'aborting...' )
+		exit()
+
+	main( username, platform, region )

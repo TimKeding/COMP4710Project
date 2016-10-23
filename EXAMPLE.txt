@@ -1,1 +1,7 @@
-python main.py MoreRicePlease https://playoverwatch.com/en-us/career/psn/MoreRicePlease
+usage:
+	
+	python main.py USERNAME(#NUMBER) PSN|XBL|( PC US|KR|US )
+
+python main.py MoreRicePlease PSN
+
+python main.py Acepalm#21564 PC US
