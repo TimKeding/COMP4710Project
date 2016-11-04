@@ -5,7 +5,7 @@ class Constant_Maker:
     def generate_id(self, count=1):
         if count == 1:
             r = self.curr_id
-            self.curr_id += 1
+            self.curr_id +=1
             return r
 
         start = self.curr_id
@@ -64,77 +64,104 @@ def get_values(html_text, handle):
 
     return r_values
 
+class PlayerNotFound(KeyError):
+    def __init__(self, player):
+        message = '{0} has likely been deleted or banned and cannot be retrieved'.format(player)
+        super(PlayerNotFound, self).__init__(message)
 
-def get_player_bag(html_text, handle):
-    fields_after_handle = get_values(html_text, handle)
+def get_player_bag(htmlText, handle):
 
-    quickplay_bag = dict()
-    competitive_bag = dict()
-    player_bags = [quickplay_bag, competitive_bag]
+    valuesList = get_values(htmlText, handle)
+    # to handle deleted / banned players
+    if len(valuesList) == 0:
+        raise PlayerNotFound(handle)
 
-    LOOKING_FOR_HERO, READING_STATS = CONST_MAKER.generate_id(2)
+    quickplayBag = dict()
+    competitiveBag = dict()
+    playerBags = [quickplayBag, competitiveBag]
 
-    current_hero = -1
-    read_mode = LOOKING_FOR_HERO
-    curr_idx = 0
-    # section_labels = [ 'Combat', 'Assists', 'Best', 'Average', 'Deaths', 'Match Awards', 'Game', 'Miscellaneous' ]
-    section_labels = ['Combat', 'Assists', 'Best', 'Average', 'Match Awards', 'Game', 'Miscellaneous']
+    sectionLabels = ['Hero Specific', 'Combat', 'Assists', 'Best', 'Average', 'Deaths', 'Match Awards', 'Game', 'Miscellaneous']
+    sectionToIdx = dict()
+    for idx in range(len(sectionLabels)):
+        sectionToIdx[sectionLabels[idx]] =idx
+
+    FINDING_FIRST_HERO, READING_VALUES = CONST_MAKER.generate_id(2)
+    FINISH_MARKER_VALUE = 'Achievements'
+
+    currValIdx = 0
+    currVal = valuesList[currValIdx]
+    currHeroIdx = -1
+    currSectionIdx = None
+    currBag = quickplayBag
+    mode = FINDING_FIRST_HERO
     encountered_deaths = False
-    curr_val = fields_after_handle[curr_idx]
-    destination_bag = quickplay_bag
-    while (curr_val != 'Achievements'):
+    while( FINISH_MARKER_VALUE != currVal ):
 
-        try:
-            curr_val = fields_after_handle[curr_idx]
-            if 'Achievements' == curr_val:
-                break
-        except IndexError as i:
-            print('error with', curr_idx)
-            break
+        if FINDING_FIRST_HERO == mode:
+            currVal = valuesList[currValIdx]
 
-        if READING_STATS == read_mode:
-
-            if 'Hero Specific' == curr_val:
-                current_hero += 1
-                destination_bag[current_hero] = list()
-                curr_idx += 1
-
-            # throws off the 2-val pull in the else-branch
-            elif curr_val in section_labels:
-                curr_idx += 1
-
-            # Deaths is a field AND a section label
-            # Throws off the indexing otherwise
-            elif 'Deaths' == curr_val and (not encountered_deaths):
-                encountered_deaths = True
-                curr_idx += 1
-
-            # marks the competitive data
-            elif 'Featured Stats' == curr_val:
-                read_mode = LOOKING_FOR_HERO
-                current_hero = -1
-                destination_bag = competitive_bag
+            if currVal not in sectionLabels:
+                currValIdx +=1
                 continue
+            currSectionIdx = sectionToIdx[currVal]
+            if 'Deaths' == currVal:
+                encountered_deaths = True
+                
+            # the first hero is encountered
+            currValIdx +=1
+            currHeroIdx +=1
+            currBag[currHeroIdx] = list()
+            mode = READING_VALUES
+
+        elif READING_VALUES == mode:
+            currVal = valuesList[currValIdx]
+
+            # handle double Deaths labels
+            if 'Deaths' == currVal and (not encountered_deaths):
+                encountered_deaths = True
+                currValIdx +=1
+
+            # handle section labels
+            # - and not deaths to let the else handle the Deaths field value
+            elif currVal in sectionLabels and (currVal != 'Deaths'):
+                newSectionIdx = sectionToIdx[currVal]
+
+                # this new section <= miscellaneous -> same hero
+                if newSectionIdx > currSectionIdx:
+                    currSectionIdx = newSectionIdx
+                    currValIdx +=1
+
+                # this new section past miscellaneous of current hero -> next hero
+                else:
+                    currSectionIdx = newSectionIdx
+                    currHeroIdx +=1
+                    currBag[currHeroIdx] = list()
+                    currValIdx +=1
+                    encountered_deaths = False
+
+            # past here is competitive
+            elif 'Featured Stats' == currVal:
+                currBag = competitiveBag
+                currValIdx +=1
+                currHeroIdx =-1
+                encountered_deaths = False
+                mode = FINDING_FIRST_HERO
+
+            # no more heroes past here
+            elif 'Achievements' == currVal:
+                break
 
             else:
-                label, val = fields_after_handle[curr_idx: curr_idx + 2]
-                destination_bag[current_hero].append((label, val))
-                curr_idx += 2
+                label, val = valuesList[currValIdx : currValIdx +2]
+                currBag[currHeroIdx].append((label, val))
+                currValIdx +=2
 
-        elif LOOKING_FOR_HERO == read_mode:
+    return playerBags
 
-            if 'Hero Specific' == curr_val:
-                read_mode = READING_STATS
-                current_hero += 1
-                destination_bag[current_hero] = list()
-                encountered_deaths = False
-            curr_idx += 1
 
-    return player_bags
 
 
 import requests
-
 
 def main(username, platform, region, export_file):
     if region:
@@ -185,6 +212,40 @@ def main(username, platform, region, export_file):
         write_results.close()
     except IndexError:
             print('Player not found:' + username + " " + platform + " " + region)
+
+# importable main
+def requestPlayerBag(username, platform, region, delimiter='-'):
+    if region:
+        countSharp = len(username.split(delimiter)) -1
+        if countSharp == 0:
+            print('err: no number on PC battletag')
+            print('aborting...')
+            exit()
+        elif countSharp >1:
+            print('err: battletag has too many #')
+            print('aborting...')
+            exit()
+
+        name, number = username.split(delimiter)
+        try:
+            n = int(number)
+        except ValueError as v:
+            print('err: given battletag has no number')
+            print('aborting...')
+            exit()
+
+        url = 'https://playoverwatch.com/en-us/career/pc/' +region.lower() +'/' +name +'-' +number
+    
+    else:
+        name = username
+        url = 'https://playoverwatch.com/en-us/career/' +platform.lower() +'/' +username
+
+    r = requests.get(url)
+    htmlText = r.text
+    playerBags = get_player_bag(htmlText, name)
+    quickplayBag, competitiveBag = playerBags
+
+    return quickplayBag, competitiveBag
 
 # ---
 
