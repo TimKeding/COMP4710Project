@@ -26,7 +26,9 @@ ENCODING = 'utf-8'
 def get_values(html_text, handle):
     r_values = list()
 
-    LOOKING_FOR_GT, LOOKING_FOR_C = range(2)
+    LOOKING_FOR_GT, LOOKING_FOR_C, LOOKING_FOR_ID, LOOKING_FOR_END_ID = range(4)
+
+    id_name = 'data-category-id="0'
 
     read_mode = LOOKING_FOR_GT
     encountered_handle = False
@@ -38,6 +40,10 @@ def get_values(html_text, handle):
             if '>' == c:
                 curr_string = ''
                 read_mode = LOOKING_FOR_C
+            elif 'd' == c:
+                curr_string = ''
+                pos = 1
+                read_mode = LOOKING_FOR_ID
 
         elif LOOKING_FOR_C == read_mode:
 
@@ -62,6 +68,32 @@ def get_values(html_text, handle):
                     else:
                         continue
 
+        elif LOOKING_FOR_ID == read_mode:
+
+            if pos < len(id_name) and c == id_name[pos]:
+                pos += 1
+
+            elif pos == len(id_name) and c != '"':
+                curr_string += c
+
+            else:
+
+                read_mode = LOOKING_FOR_GT
+
+                if len(curr_string) == 0: continue
+
+                if encountered_handle:
+                    r_values.append('0' + curr_string)
+
+                else:
+
+                    if handle == curr_string:
+                        encountered_handle = True
+                        r_values.append('0' + curr_string)
+
+                    else:
+                        continue
+
     return r_values
 
 
@@ -81,6 +113,17 @@ def get_player_bag(html_text, handle):
     section_labels = ['Combat', 'Assists', 'Best', 'Average', 'Match Awards', 'Game', 'Miscellaneous']
     encountered_deaths = False
     curr_val = fields_after_handle[curr_idx]
+    all_hero_ids = ['0x02E0000000000002', '0x02E0000000000003', '0x02E0000000000004', '0x02E0000000000005', '0x02E0000000000006', '0x02E0000000000007', '0x02E0000000000008', '0x02E0000000000009',
+                  '0x02E000000000000A', '0x02E0000000000015', '0x02E0000000000016', '0x02E0000000000020', '0x02E0000000000029', '0x02E0000000000040', '0x02E0000000000042', '0x02E0000000000065',
+                  '0x02E0000000000068', '0x02E000000000006E', '0x02E0000000000079', '0x02E000000000007A', '0x02E00000000000DD', '0x02E000000000013B']
+    all_heroes = ['Reaper', 'Tracer', 'Mercy', 'Hanzo', 'Torbjorn', 'Reinhardt', 'Pharah', 'Winston', 'Widowmaker', 'Bastion', 'Symmetra', 'Zenyatta', 'Genji', 'Roadhog', 'McCree', 'Junkrat',
+                  'Zarya', 'Soldier 76', 'Lucio', 'D.Va', 'Mei', 'Ana']
+    for hero in range(len(all_heroes)):
+        quickplay_bag[hero] = list()
+        competitive_bag[hero] = list()
+        quickplay_bag[hero].append(('Hero:', all_heroes[hero]))
+        competitive_bag[hero].append(('Hero:', all_heroes[hero]))
+
     destination_bag = quickplay_bag
     while (curr_val != 'Achievements'):
 
@@ -95,8 +138,8 @@ def get_player_bag(html_text, handle):
         if READING_STATS == read_mode:
 
             if 'Hero Specific' == curr_val:
-                current_hero += 1
-                destination_bag[current_hero] = list()
+                #current_hero += 1
+                #destination_bag[current_hero] = list()
                 curr_idx += 1
 
             # throws off the 2-val pull in the else-branch
@@ -112,7 +155,7 @@ def get_player_bag(html_text, handle):
             # marks the competitive data
             elif 'Featured Stats' == curr_val:
                 read_mode = LOOKING_FOR_HERO
-                current_hero = -1
+                #current_hero = -1
                 destination_bag = competitive_bag
                 continue
 
@@ -123,9 +166,10 @@ def get_player_bag(html_text, handle):
 
         elif LOOKING_FOR_HERO == read_mode:
 
-            if 'Hero Specific' == curr_val:
+            if '0x02E' == curr_val[0:5] and curr_val[-1] != 'F':
                 read_mode = READING_STATS
-                current_hero += 1
+                current_hero = all_hero_ids.index(curr_val)
+                #current_hero += 1
                 destination_bag[current_hero] = list()
                 encountered_deaths = False
             curr_idx += 1
@@ -200,8 +244,8 @@ if __name__ == '__main__':
 
     pc_us_file = open('res/pc_us.txt', 'r')
     with open('res/pc_us_results', 'w'): pass
-    for line in pc_us_file:
-        main(line.strip('\n'), 'PC', 'US', 'res/pc_us_results')
+    #for line in pc_us_file:
+    main('Timbermaw-11852', 'PC', 'US', 'res/pc_us_results')#line.strip('\n')
     pc_us_file.close()
 
     # pc_eu_file = open('res/pc_eu.txt', 'r')
