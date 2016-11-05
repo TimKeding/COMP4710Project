@@ -26,7 +26,7 @@ ENCODING = 'utf-8'
 def get_values(html_text, handle):
     r_values = list()
 
-    LOOKING_FOR_GT, LOOKING_FOR_C, LOOKING_FOR_ID, LOOKING_FOR_END_ID = range(4)
+    LOOKING_FOR_GT, LOOKING_FOR_C, LOOKING_FOR_ID = range(3)
 
     id_name = 'data-category-id="0'
 
@@ -57,12 +57,14 @@ def get_values(html_text, handle):
                 if len(curr_string) == 0: continue
 
                 if encountered_handle:
+                    #print(curr_string)
                     r_values.append(curr_string)
 
                 else:
 
                     if handle == curr_string:
                         encountered_handle = True
+                        #print(curr_string)
                         r_values.append(curr_string)
 
                     else:
@@ -83,12 +85,14 @@ def get_values(html_text, handle):
                 if len(curr_string) == 0: continue
 
                 if encountered_handle:
+                    #print(curr_string)
                     r_values.append('0' + curr_string)
 
                 else:
 
                     if handle == curr_string:
                         encountered_handle = True
+                        #print(curr_string)
                         r_values.append('0' + curr_string)
 
                     else:
@@ -244,8 +248,8 @@ if __name__ == '__main__':
 
     pc_us_file = open('res/pc_us.txt', 'r')
     with open('res/pc_us_results', 'w'): pass
-    #for line in pc_us_file:
-    main('Timbermaw-11852', 'PC', 'US', 'res/pc_us_results')#line.strip('\n')
+    for line in pc_us_file:
+        main(line.strip('\n'), 'PC', 'US', 'res/pc_us_results')
     pc_us_file.close()
 
     # pc_eu_file = open('res/pc_eu.txt', 'r')
