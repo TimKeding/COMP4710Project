@@ -1,0 +1,12 @@
+PlayerNotFound
+
+get_player_bag
+	- raises PlayerNotFound
+	- changed read method
+		- original switched heroes based on encountering the Hero Specific label
+			- not all players had Hero Specific for all heroes
+		- new switches heroes based on reading a previous label
+			ex. if after reading the 'Match Awards', 'Combat' is found
+				- means the current hero ended
+
+importable main
