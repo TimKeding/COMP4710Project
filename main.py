@@ -24,45 +24,65 @@ ENCODING = 'utf-8'
 
 
 def get_values(html_text, handle):
-    r_values = list()
 
-    LOOKING_FOR_GT, LOOKING_FOR_C = range(2)
+    rValues = list()
+    FINDING_TRIGGER, COLLECTING_VAL, COLLECTING_HERO_MARKER, COLLECTING_HERO_ID = range(4)
+    HERO_MARKER ='svg#0x02E00000000000'
 
-    read_mode = LOOKING_FOR_GT
-    encountered_handle = False
 
-    curr_string = ''
+    mode = FINDING_TRIGGER
+    currString =''
+    collectedMarker =''
+    markerIndex =0
+    currID =''
+    foundHandle =False
+
     for c in html_text:
 
-        if LOOKING_FOR_GT == read_mode:
+        if FINDING_TRIGGER == mode:
             if '>' == c:
-                curr_string = ''
-                read_mode = LOOKING_FOR_C
+                mode = COLLECTING_VAL
+                currString =''
+            elif '.' == c:
+                if not foundHandle:
+                    continue
+                mode = COLLECTING_HERO_MARKER
+                collectedMarker =''
+                markerIndex =0
 
-        elif LOOKING_FOR_C == read_mode:
-
-            if c != '<':
-                curr_string += c
-
-            else:
-
-                read_mode = LOOKING_FOR_GT
-
-                if len(curr_string) == 0: continue
-
-                if encountered_handle:
-                    r_values.append(curr_string)
-
-                else:
-
-                    if handle == curr_string:
-                        encountered_handle = True
-                        r_values.append(curr_string)
-
-                    else:
+        elif COLLECTING_VAL == mode:
+            if '<' == c:
+                mode = FINDING_TRIGGER
+                if foundHandle:
+                    currString = currString.strip()
+                    if len(currString) ==0:
                         continue
+                    rValues.append(currString)
+                    continue
+                if handle == currString:
+                    foundHandle =True
+                    rValues.append(currString)
+            else:
+                currString += c
 
-    return r_values
+        elif COLLECTING_HERO_MARKER == mode:
+            if HERO_MARKER[markerIndex] == c:
+                markerIndex +=1
+                # if at last character
+                if len(HERO_MARKER) == markerIndex:
+                    mode = COLLECTING_HERO_ID
+                    currID =''
+            else:
+                mode =FINDING_TRIGGER
+
+        elif COLLECTING_HERO_ID == mode:
+            currID += c
+            # IDs are 2chars long
+            if len(currID) ==2:
+                rValues.append('HeroID={0}'.format(currID))
+                mode =FINDING_TRIGGER
+
+    return rValues
 
 class PlayerNotFound(KeyError):
     def __init__(self, player):
