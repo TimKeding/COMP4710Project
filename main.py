@@ -23,115 +23,219 @@ import codecs
 ENCODING = 'utf-8'
 
 
-def get_values(html_text, handle):
-    r_values = list()
+def get_values(htmlText, handle):
 
-    LOOKING_FOR_GT, LOOKING_FOR_C = range(2)
+    rValues =list()
 
-    read_mode = LOOKING_FOR_GT
-    encountered_handle = False
+    FINDING_TRIGGER, COLLECTING_VAL, COLLECTING_HERO_MARKER, COLLECTING_HERO_ID =range(4)
+    HERO_MARKER ='svg#0x02E00000000000'
 
-    curr_string = ''
-    for c in html_text:
+    mode =FINDING_TRIGGER
+    currString =''
+    collectedMarker =''
+    markerIndex =0
+    currID =''
+    foundHandle =False
 
-        if LOOKING_FOR_GT == read_mode:
-            if '>' == c:
-                curr_string = ''
-                read_mode = LOOKING_FOR_C
+    for c in htmlText:
 
-        elif LOOKING_FOR_C == read_mode:
+        if FINDING_TRIGGER ==mode:
+            # value displayed on screen
+            if '>' ==c:
+                mode =COLLECTING_VAL
+                currString =''
+            
+            # possibly the HERO_MARKER
+            elif '.' ==c:
+                # else branch saves space
+                if foundHandle:
+                    mode =COLLECTING_HERO_MARKER
+                    collectedMarker =''
+                    markerIndex =0
 
-            if c != '<':
-                curr_string += c
-
+        elif COLLECTING_VAL ==mode:
+            # closes collected val
+            if '<' ==c:
+                mode =FINDING_TRIGGER
+                # else branch saves space
+                if foundHandle:
+                    currString =currString.strip()
+                    # ignores blanks
+                    if len(currString) ==0:
+                        continue
+                    rValues.append(currString)
+                    # skips following if
+                if handle ==currString:
+                    foundHandle =True
+                    rValues.append(currString)
             else:
+                currString +=c
 
-                read_mode = LOOKING_FOR_GT
+        elif COLLECTING_HERO_MARKER ==mode:
+            # matching the marker
+            if HERO_MARKER[markerIndex] ==c:
+                markerIndex +=1
+                # last character trigger
+                if len(HERO_MARKER) ==markerIndex:
+                    mode =COLLECTING_HERO_ID
+                    currID =''
 
-                if len(curr_string) == 0: continue
+            # sudden mismatch -> reset
+            else:
+                mode =FINDING_TRIGGER
 
-                if encountered_handle:
-                    r_values.append(curr_string)
+        elif COLLECTING_HERO_ID ==mode:
+            # fill up the ID
+            currID +=c
+            # ID is two characters long
+            if len(currID) ==2:
+                rValues.append('HeroID={0}'.format(currID))
+                mode =FINDING_TRIGGER
 
-                else:
+    return rValues
 
-                    if handle == curr_string:
-                        encountered_handle = True
-                        r_values.append(curr_string)
+class PlayerNotFound(KeyError):
+    def __init__(self, player):
+        message ='{0} has likely been deleted/banned; cannot retrieve'.format(player)
+        super(PlayerNotFound, self).__init__(message)
 
-                    else:
+SECTION_LABELS =['Hero Specific', 'Combat', 'Assists', 'Best', 'Average']
+SECTION_LABELS.extend(['Deaths', 'Match Awards', 'Game', 'Miscellaneous'])
+
+SECTION_TO_INDEX =dict()
+for idx in range(len(SECTION_LABELS)):
+    SECTION_TO_INDEX[SECTION_LABELS[idx]] =idx
+
+FINDING_QUICKPLAY, FINDING_HERO_DATA, READING_HEROES =range(3)
+HERO_DATA_MARKER ='Featured Stats'
+ENDING_MARKER ='Achievements'
+def get_player_bag(htmlText, handle):
+
+    valueList =get_values(htmlText, handle)
+    # handles deleted/banned
+    if 0 ==len(valueList):
+        raise PlayerNotFound(handle)
+
+    quickplayBag =dict()
+    competitiveBag =dict()
+    playerBags =[quickplayBag, competitiveBag]
+    targetBag =quickplayBag
+    currSection =None
+    encounteredDeaths =False
+    heroID =None
+
+    mode =FINDING_QUICKPLAY
+    valIdx =0
+    while valIdx <len(valueList):
+
+        val =valueList[valIdx]
+
+        if FINDING_QUICKPLAY ==mode:
+            if HERO_DATA_MARKER ==val:
+                mode =FINDING_HERO_DATA
+
+            valIdx +=1
+
+        elif FINDING_HERO_DATA ==mode:
+            # denotes beginning of Competitive data
+            if HERO_DATA_MARKER ==val:
+                targetBag =competitiveBag
+
+            # denotes end of hero data
+            elif ENDING_MARKER ==val:
+                break
+
+            elif 'HeroID=' in val:
+                mode =READING_HEROES
+                heroID =val[-2:]
+                targetBag[heroID] =list()
+
+            valIdx +=1
+
+        elif READING_HEROES ==mode:
+            # denotes Competitive Section
+            if HERO_DATA_MARKER ==val:
+                targetBag =competitiveBag
+                mode =FINDING_HERO_DATA
+
+                valIdx +=1
+
+            # denotes end of all hero data
+            elif ENDING_MARKER ==val:
+                break
+
+            elif 'HeroID' in val:
+                heroID =val[-2:]
+                targetBag[heroID] =list()
+
+                valIdx +=1
+
+            # could be section or value label
+            elif 'Deaths' ==val:
+                # is a section
+                if not encounteredDeaths:
+                    encounteredDeaths =True
+
+                    thisSection =val
+                    thisSectionIndex =SECTION_TO_INDEX[thisSection]
+
+                    # first section
+                    if not currSection:
+                        currSection =thisSection
+
+                        valIdx +=1
                         continue
 
-    return r_values
+                    # indicates new hero
+                    currSectionIndex =SECTION_TO_INDEX[currSection]
+                    if thisSectionIndex <currSectionIndex:
+                        mode =FINDING_HERO_DATA
+                        currSection =thisSection
+                        encounteredDeaths =False
 
+                        valIdx +=1
 
-def get_player_bag(html_text, handle):
-    fields_after_handle = get_values(html_text, handle)
+                    else:
+                        currSection =thisSection
 
-    quickplay_bag = dict()
-    competitive_bag = dict()
-    player_bags = [quickplay_bag, competitive_bag]
+                        valIdx +=1
 
-    LOOKING_FOR_HERO, READING_STATS = CONST_MAKER.generate_id(2)
+                # is a label
+                else:
+                    labelValue =(val, valueList[valIdx +1])
+                    targetBag[heroID].append(labelValue)
 
-    current_hero = -1
-    read_mode = LOOKING_FOR_HERO
-    curr_idx = 0
-    # section_labels = [ 'Combat', 'Assists', 'Best', 'Average', 'Deaths', 'Match Awards', 'Game', 'Miscellaneous' ]
-    section_labels = ['Combat', 'Assists', 'Best', 'Average', 'Match Awards', 'Game', 'Miscellaneous']
-    encountered_deaths = False
-    curr_val = fields_after_handle[curr_idx]
-    destination_bag = quickplay_bag
-    while (curr_val != 'Achievements'):
+                    valIdx +=2
 
-        try:
-            curr_val = fields_after_handle[curr_idx]
-            if 'Achievements' == curr_val:
-                break
-        except IndexError as i:
-            print('error with', curr_idx)
-            break
+            elif val in SECTION_LABELS:
+                thisSection =val
+                thisSectionIndex =SECTION_TO_INDEX[thisSection]
 
-        if READING_STATS == read_mode:
+                # first section encountered
+                if not currSection:
+                    currSection =thisSection
+                    valIdx +=1
+                    continue
 
-            if 'Hero Specific' == curr_val:
-                current_hero += 1
-                destination_bag[current_hero] = list()
-                curr_idx += 1
+                # indicates new hero
+                currSectionIndex =SECTION_TO_INDEX[currSection]
+                if thisSectionIndex <currSectionIndex:
+                    currSection =thisSection
+                    encounteredDeaths =False
 
-            # throws off the 2-val pull in the else-branch
-            elif curr_val in section_labels:
-                curr_idx += 1
+                    valIdx +=1
 
-            # Deaths is a field AND a section label
-            # Throws off the indexing otherwise
-            elif 'Deaths' == curr_val and (not encountered_deaths):
-                encountered_deaths = True
-                curr_idx += 1
+                else:
+                    currSection =thisSection
 
-            # marks the competitive data
-            elif 'Featured Stats' == curr_val:
-                read_mode = LOOKING_FOR_HERO
-                current_hero = -1
-                destination_bag = competitive_bag
-                continue
-
+                    valIdx +=1
             else:
-                label, val = fields_after_handle[curr_idx: curr_idx + 2]
-                destination_bag[current_hero].append((label, val))
-                curr_idx += 2
+                labelValue =(val, valueList[valIdx +1])
+                targetBag[heroID].append(labelValue)
 
-        elif LOOKING_FOR_HERO == read_mode:
+                valIdx +=2
 
-            if 'Hero Specific' == curr_val:
-                read_mode = READING_STATS
-                current_hero += 1
-                destination_bag[current_hero] = list()
-                encountered_deaths = False
-            curr_idx += 1
-
-    return player_bags
-
+    return playerBags
 
 import requests
 
@@ -185,7 +289,6 @@ def main(username, platform, region, export_file):
         write_results.close()
     except IndexError:
             print('Player not found:' + username + " " + platform + " " + region)
-
 # ---
 
 def complain(prob_string):
