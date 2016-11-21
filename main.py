@@ -28,7 +28,7 @@ def get_values(htmlText, handle):
     rValues =list()
 
     FINDING_TRIGGER, COLLECTING_VAL, COLLECTING_HERO_MARKER, COLLECTING_HERO_ID =range(4)
-    HERO_MARKER ='svg#0x02E00000000000'
+    HERO_MARKER ='svg#0x02E0000000000'
 
     mode =FINDING_TRIGGER
     currString =''
@@ -88,7 +88,7 @@ def get_values(htmlText, handle):
             # fill up the ID
             currID +=c
             # ID is two characters long
-            if len(currID) ==2:
+            if len(currID) ==3:
                 rValues.append('HeroID={0}'.format(currID))
                 mode =FINDING_TRIGGER
 
@@ -147,7 +147,7 @@ def get_player_bag(htmlText, handle):
 
             elif 'HeroID=' in val:
                 mode =READING_HEROES
-                heroID =val[-2:]
+                heroID =val[-3:]
                 targetBag[heroID] =list()
 
             valIdx +=1
@@ -165,7 +165,7 @@ def get_player_bag(htmlText, handle):
                 break
 
             elif 'HeroID' in val:
-                heroID =val[-2:]
+                heroID =val[-3:]
                 targetBag[heroID] =list()
 
                 valIdx +=1
@@ -267,26 +267,23 @@ def main(username, platform, region, export_file):
 
     r = requests.get(url)
     html_text = r.text
+    heroes = {'040': 'roadhog', '002': 'reaper', '003': 'tracer', '004': 'mercy', '005': 'hanzo', '006': 'torbjorn', '007': 'reinhardt', '008': 'pharah', '009': 'winston', '00A': 'widowmaker', '015': 'bastion',
+              '016': 'symmetra', '020': 'zenyatta', '029': 'genji', '042': 'mccree', '065': 'junkrat', '068': 'zarya', '06E': 'soldier76', '079': 'lucio', '07A': 'd.va', '0DD': 'mei', '13B': 'ana'}
     try:
         player_bags = get_player_bag(html_text, name)
 
-        bag_and_label = list()
-        bag_and_label.append(('Quick Play', player_bags[0]))
-        bag_and_label.append(('Competitive', player_bags[1]))
 
-        write_results = open(export_file, 'a')
+        for hero in player_bags[1]:
+            export = export_file + heroes[hero] + '_results'
 
-        write_results.write(username + '\n')
-        for label, bag in bag_and_label:
-            write_results.write(label + '\n')
+            write_results = open(export, 'a')
+            write_results.write(username + '\n')
+            write_results.write('\t{0}'.format(hero) + '\n')
 
-            for hero in bag:
-                write_results.write('\t{0}'.format(hero) + '\n')
-
-                for label, val in bag[hero]:
-                    write_results.write('\t\t{0} | {1}'.format(label, val) + '\n')
-        write_results.write('-----------------\n')
-        write_results.close()
+            for label, val in player_bags[1][hero]:
+                write_results.write('\t\t{0} | {1}'.format(label, val) + '\n')
+            write_results.write('-----------------\n')
+            write_results.close()
     except IndexError:
             print('Player not found:' + username + " " + platform + " " + region)
 # ---
@@ -304,7 +301,7 @@ if __name__ == '__main__':
     pc_us_file = open('res/pc_us.txt', 'r')
     with open('res/pc_us_results', 'w'): pass
     for line in pc_us_file:
-        main(line.strip('\n'), 'PC', 'US', 'res/pc_us_results')
+        main(line.strip('\n'), 'PC', 'US', 'res/competitive/pc/')
     pc_us_file.close()
 
     # pc_eu_file = open('res/pc_eu.txt', 'r')
