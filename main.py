@@ -278,7 +278,6 @@ def main(username, platform, region, export_file):
 
             write_results = open(export, 'a')
             write_results.write(username + '\n')
-            write_results.write('\t{0}'.format(hero) + '\n')
 
             for label, val in player_bags[1][hero]:
                 write_results.write('\t\t{0} | {1}'.format(label, val) + '\n')
@@ -296,7 +295,17 @@ def complain(prob_string):
 # handle different platforms
 import sys
 
+def clearFiles():
+    consoles = {'pc', 'psn', 'xbl'}
+    heroes = {'ana', 'bastion', 'd.va', 'genji', 'hanzo', 'lucio', 'mccree', 'mei', 'mercy', 'pharah', 'reaper', 'reinhardt', 'roadhog', 'soldier76', 'sombra', 'tracer', 'winston', 'zarya', 'zenyatta'}
+
+    for console in consoles:
+        for hero in heroes:
+            open('res/competitive/' + console + '/' + hero + '_results', 'w').close()
+
 if __name__ == '__main__':
+
+    clearFiles()
 
     pc_us_file = open('res/pc_us.txt', 'r')
     with open('res/pc_us_results', 'w'): pass
