@@ -28,7 +28,7 @@ def get_values(htmlText, handle):
     rValues =list()
 
     FINDING_TRIGGER, COLLECTING_VAL, COLLECTING_HERO_MARKER, COLLECTING_HERO_ID =range(4)
-    HERO_MARKER ='svg#0x02E00000000000'
+    HERO_MARKER ='svg#0x02E0000000000'
 
     mode =FINDING_TRIGGER
     currString =''
@@ -88,7 +88,7 @@ def get_values(htmlText, handle):
             # fill up the ID
             currID +=c
             # ID is two characters long
-            if len(currID) ==2:
+            if len(currID) ==3:
                 rValues.append('HeroID={0}'.format(currID))
                 mode =FINDING_TRIGGER
 
@@ -147,7 +147,7 @@ def get_player_bag(htmlText, handle):
 
             elif 'HeroID=' in val:
                 mode =READING_HEROES
-                heroID =val[-2:]
+                heroID =val[-3:]
                 targetBag[heroID] =list()
 
             valIdx +=1
@@ -165,7 +165,7 @@ def get_player_bag(htmlText, handle):
                 break
 
             elif 'HeroID' in val:
-                heroID =val[-2:]
+                heroID =val[-3:]
                 targetBag[heroID] =list()
 
                 valIdx +=1
