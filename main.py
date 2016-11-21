@@ -123,12 +123,16 @@ def get_player_bag(htmlText, handle):
     currSection =None
     encounteredDeaths =False
     heroID =None
+    srRanking = 0
 
     mode =FINDING_QUICKPLAY
     valIdx =0
     while valIdx <len(valueList):
 
         val =valueList[valIdx]
+
+        if valIdx == 2:
+            srRanking = val
 
         if FINDING_QUICKPLAY ==mode:
             if HERO_DATA_MARKER ==val:
@@ -166,8 +170,8 @@ def get_player_bag(htmlText, handle):
 
             elif 'HeroID' in val:
                 heroID =val[-3:]
-                targetBag[heroID] =list()
-
+                targetBag[heroID] = list()
+                targetBag[heroID].append(('SR', srRanking))
                 valIdx +=1
 
             # could be section or value label
