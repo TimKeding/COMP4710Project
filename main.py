@@ -312,28 +312,25 @@ if __name__ == '__main__':
     clearFiles()
 
     pc_us_file = open('res/pc_us.txt', 'r')
-    with open('res/pc_us_results', 'w'): pass
     for line in pc_us_file:
-        main(line.strip('\n'), 'PC', 'US', 'res/competitive/pc/')
+        try:
+            main(line.strip('\n'), 'PC', 'US', 'res/competitive/pc/')
+        except:
+            pass
     pc_us_file.close()
 
     # pc_eu_file = open('res/pc_eu.txt', 'r')
-    # with open('res/pc_eu_results', 'w'): pass
     # for line in pc_eu_file:
     #     main(line.strip('\n'), 'PC', 'EU', 'res/pc_eu_results')
     #
     # pc_kr_file = open('res/pc_kr.txt', 'r')
-    # with open('res/pc_kr_results', 'w'): pass
     # for line in pc_kr_file:
     #     main(line.strip('\n'), 'PC', 'KR', 'res/pc_kr_results')
     #
     # xbl_file = open('res/xbl.txt', 'r')
-    # with open('res/xbl_results', 'w'): pass
     # for line in xbl_file:
     #     main(line.strip('\n'), 'XBL', 'US', 'res/xbl_results')
     #
     # psn_file = open('res/psn.txt', 'r')
-    # with open('res/psn_results', 'w'): pass
     # for line in psn_file:
     #     main(line.strip('\n'), 'PSN', 'US', 'res/psn_results')
-
