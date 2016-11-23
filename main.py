@@ -274,6 +274,7 @@ def main(username, platform, region, export_file):
     heroes = {'040': 'roadhog', '002': 'reaper', '003': 'tracer', '004': 'mercy', '005': 'hanzo', '006': 'torbjorn', '007': 'reinhardt', '008': 'pharah', '009': 'winston', '00A': 'widowmaker', '015': 'bastion',
               '016': 'symmetra', '020': 'zenyatta', '029': 'genji', '042': 'mccree', '065': 'junkrat', '068': 'zarya', '06E': 'soldier76', '079': 'lucio', '07A': 'd.va', '0DD': 'mei', '13B': 'ana'}
     try:
+
         player_bags = get_player_bag(html_text, name)
 
 
@@ -301,7 +302,7 @@ import sys
 
 def clearFiles():
     consoles = {'pc', 'psn', 'xbl'}
-    heroes = {'ana', 'bastion', 'd.va', 'genji', 'hanzo', 'lucio', 'mccree', 'mei', 'mercy', 'pharah', 'reaper', 'reinhardt', 'roadhog', 'soldier76', 'sombra', 'tracer', 'winston', 'zarya', 'zenyatta'}
+    heroes = {'ana', 'bastion', 'd.va', 'genji', 'hanzo', 'lucio', 'mccree', 'mei', 'mercy', 'pharah', 'reaper', 'reinhardt', 'roadhog', 'soldier76', 'sombra', 'tracer', 'winston', 'widowmaker', 'zarya', 'zenyatta'}
 
     for console in consoles:
         for hero in heroes:
@@ -319,18 +320,31 @@ if __name__ == '__main__':
             pass
     pc_us_file.close()
 
-    # pc_eu_file = open('res/pc_eu.txt', 'r')
-    # for line in pc_eu_file:
-    #     main(line.strip('\n'), 'PC', 'EU', 'res/pc_eu_results')
-    #
-    # pc_kr_file = open('res/pc_kr.txt', 'r')
-    # for line in pc_kr_file:
-    #     main(line.strip('\n'), 'PC', 'KR', 'res/pc_kr_results')
-    #
-    # xbl_file = open('res/xbl.txt', 'r')
-    # for line in xbl_file:
-    #     main(line.strip('\n'), 'XBL', 'US', 'res/xbl_results')
-    #
-    # psn_file = open('res/psn.txt', 'r')
-    # for line in psn_file:
-    #     main(line.strip('\n'), 'PSN', 'US', 'res/psn_results')
+    pc_eu_file = open('res/pc_eu.txt', 'r')
+    for line in pc_eu_file:
+        try:
+            main(line.strip('\n'), 'PC', 'US', 'res/competitive/pc/')
+        except:
+            pass
+
+
+    pc_kr_file = open('res/pc_kr.txt', 'r')
+    for line in pc_kr_file:
+        try:
+            main(line.strip('\n'), 'PC', 'US', 'res/competitive/pc/')
+        except:
+            pass
+
+    xbl_file = open('res/xbl.txt', 'r')
+    for line in xbl_file:
+        try:
+            main(line.strip('\n'), 'XBL', None, 'res/competitive/xbl/')
+        except:
+            pass
+
+    psn_file = open('res/psn.txt', 'r')
+    for line in psn_file:
+        try:
+            main(line.strip('\n'), 'PSN', None, 'res/competitive/psn/')
+        except:
+            pass
