@@ -17,6 +17,1566 @@ class Constant_Maker:
 
 ARB_CONST = 768
 CONST_MAKER = Constant_Maker(ARB_CONST)
+ALL_HERO_STATS = {'ana': ("SR",
+                              "Scoped Hits",
+                              "Scoped Shots",
+                              "Scoped Accuracy - Best in Game",
+                              "Melee Final Blow - Most in Game",
+                              "Nano Boosts Applied", "Nano Boost Assists",
+                              "Nano Boost Assists - Most in Game",
+                              "Nano Boosts Applied - Average",
+                              "Nano Boost Assists - Average",
+                              "Unscoped Accuracy",
+                              "Scoped Accuracy",
+                              "Eliminations",
+                              "Final Blows",
+                              "Solo Kills",
+                              "Shots Fired",
+                              "Shots Hit",
+                              "Damage Done",
+                              "Objective Kills",
+                              "Multikills",
+                              'Environmental Kills',
+                              "Melee Final Blow",
+                              "Eliminations per Life",
+                              "Weapon Accuracy",
+                              "Healing Done",
+                              "Teleporter Pads Destroyed",
+                              "Turrets Destroyed",
+                              "Offensive Assists",
+                              "Self Healing",
+                              "Eliminations - Most in Life",
+                              "Damage Done - Most in Life",
+                              "Healing Done - Most in Life",
+                              "Weapon Accuracy - Best in Game",
+                              "Kill Streak - Best",
+                              "Damage Done - Most in Game",
+                              "Healing Done - Most in Game",
+                              "Eliminations - Most in Game",
+                              "Final Blows - Most in Game",
+                              "Objective Kills - Most in Game",
+                              "Objective Time - Most in Game",
+                              "Solo Kills - Most in Game",
+                              "Offensive Assists - Most in Game",
+                              "Self Healing - Most in Game",
+                              "Melee Final Blows - Average",
+                              "Self Healing - Average",
+                              "Offensive Assists - Average",
+                              "Deaths - Average",
+                              "Solo Kills - Average",
+                              "Objective Time - Average",
+                              "Objective Kills - Average",
+                              "Healing Done - Average",
+                              "Final Blows - Average",
+                              "Eliminations - Average",
+                              "Damage Done - Average",
+                              "Deaths",
+                              "Environmental Deaths"
+                              "Medals - Bronze",
+                              "Medals - Silver",
+                              "Medals - Gold",
+                              "Medals",
+                              "Time Played",
+                              "Games Played",
+                              "Games Won",
+                              "Objective Time",
+                              "Time Spent on Fire",
+                              "Win Percentage",
+                              "Defensive Assists",
+                              "Defensive Assists - Most in Game",
+                              "Healing Done",
+                              "Healing Done - Most in Game",
+                              "Unscoped Shots",
+                              "Unscoped Hits",
+                              "Enemies Slept",
+                              "Unscoped Accuracy - Best in Game",
+                              "Enemies Slept - Most in Game",
+                              "Nano Boosts Applied - Most in Game",
+                              "Games Tied",
+                              "Games Lost",
+                              "Enemies Slept - Average",
+                              "Healing Done - Average",
+                              "Defensive Assists - Average"),
+                      'bastion': ('SR',
+                                  'Recon Kills',
+                                  'Sentry Kills',
+                                  'Tank Kills',
+                                  'Sentry Kills - Most in Game',
+                                  'Recon Kills - Most in Game',
+                                  'Tank Kills - Most in Game',
+                                  'Melee Final Blow - Most in Game',
+                                  'Tank Kills - Average',
+                                  'Sentry Kills - Average',
+                                  'Recon Kills - Average',
+                                  'Eliminations',
+                                  'Final Blows',
+                                  'Solo Kills',
+                                  'Shots Fired',
+                                  'Shots Hit',
+                                  'Critical Hits',
+                                  'Damage Done',
+                                  'Objective Kills',
+                                  'Multikills',
+                                  'Environmental Kills',
+                                  'Melee Final Blows',
+                                  'Critical Hits',
+                                  'Critical Hits per Minute',
+                                  'Critical Hit Accuracy',
+                                  'Eliminations per Life',
+                                  'Weapon Accuracy',
+                                  'Healing Done',
+                                  "Teleporter Pads Destroyed",
+                                  'Turret Destroyed',
+                                  'Self Healing',
+                                  'Eliminations - Most in Life',
+                                  'Damage Done - Most in Life',
+                                  'Healing Done - Most in Life',
+                                  'Weapon Accuracy - Best in Game',
+                                  'Kill Streak - Best',
+                                  'Damage Done - Most in Game',
+                                  'Healing Done - Most in Game',
+                                  'Eliminations - Most in Game',
+                                  'Final Blows - Most in Game',
+                                  'Objective Kills - Most in Game',
+                                  'Objective Time - Most in Game',
+                                  'Solo Kills - Most in Game',
+                                  'Critical Hits - Most in Game',
+                                  'Critical Hits - Most in Life',
+                                  'Self Healing - Most in Game',
+                                  'Melee Final Blows - Average',
+                                  'Self Healing - Average',
+                                  'Deaths - Average',
+                                  'Solo Kills - Average',
+                                  'Objective Time - Average',
+                                  'Objective Kills - Average',
+                                  'Healing Done - Average',
+                                  'Final Blows - Average',
+                                  'Eliminations - Average',
+                                  'Damage Done - Average',
+                                  'Deaths',
+                                  'Environmental Death',
+                                  'Medals - Bronze',
+                                  'Medals - Silver',
+                                  'Medals - Gold',
+                                  'Medals',
+                                  'Cards',
+                                  'Time Played',
+                                  'Games Played',
+                                  'Games Won',
+                                  'Objective Time',
+                                  'Time Spent on Fire',
+                                  'Win Percentage',
+                                  'Multikill - Best',
+                                  'Games Tied',
+                                  'Games Lost'),
+                      'd.va': ('SR',
+                               'Mechs Called',
+                               'Mechs Called - Most in Game',
+                               'Damage Blocked - Most in Game',
+                               'Damage Blocked',
+                               'Mech Deaths',
+                               'Melee Final Blows - Most in Game',
+                               'Mechs Called - Average',
+                               'Damage Blocked - Average',
+                               'Eliminations',
+                               'Final Blows',
+                               'Solo Kills',
+                               'Shots Fired',
+                               'Shots Hit',
+                               'Critical Hits',
+                               'Damage Done',
+                               'Objective Kills',
+                               'Multikills',
+                               'Environmental Kills',
+                               'Melee Final Blows',
+                               'Critical Hits',
+                               'Critical Hits per Minute',
+                               'Critical Hit Accuracy',
+                               'Eliminations per Life',
+                               'Weapon Accuracy',
+                               'Healing Done',
+                               'Teleporter Pads Destroyed',
+                               'Turrets Destroyed',
+                               'Eliminations - Most in Life',
+                               'Damage Done - Most in Life',
+                               'Healing Done - Most in Life',
+                               'Weapon Accuracy - Best in Game',
+                               'Kill Streak - Best',
+                               'Damage Done - Most in Game',
+                               'Healing Done - Most in Game',
+                               'Eliminations - Most in Game',
+                               'Final Blows - Most in Game',
+                               'Objective Kills - Most in Game',
+                               'Objective Time - Most in Game',
+                               'Solo Kills - Most in Game',
+                               'Critical Hits - Most in Game',
+                               'Critical Hits - Most in Life',
+                               'Melee Final Blows - Average',
+                               'Deaths - Average',
+                               'Solo Kills - Average',
+                               'Objective Time - Average',
+                               'Objective Kills - Average',
+                               'Healing Done - Average',
+                               'Final Blows - Average',
+                               'Eliminations - Average',
+                               'Damage Done - Average',
+                               'Deaths',
+                               'Environmental Deaths',
+                               'Medals - Bronze',
+                               'Medals - Silver',
+                               'Medals - Gold',
+                               'Medals',
+                               'Cards',
+                               'Time Played',
+                               'Games Played',
+                               'Games Won',
+                               'Objective Time',
+                               'Time Spent on Fire',
+                               'Win Percentage',
+                               'Self-Destruct Kills',
+                               'Self-Destruct Kills - Most in Game',
+                               'Multikill - Best',
+                               'Games Tied',
+                               'Games Lost',
+                               'Self-Destruct Kills - Average'),
+                      'genji': ('SR',
+                                'Dragonblade Kills',
+                                'Dragonblade Kills - Most in Game',
+                                'Damage Reflected',
+                                'Damage Reflected - Most in Game',
+                                'Dragonblades',
+                                'Melee Final Blows - Most in Game',
+                                'Dragonblade Kills - Average',
+                                'Damage Reflected - Average',
+                                'Eliminations',
+                                'Final Blows',
+                                'Solo Kills',
+                                'Shots Fired',
+                                'Shots Hit',
+                                'Critical Hits',
+                                'Damage Done',
+                                'Objective Kills',
+                                'Multikills',
+                                'Environmental Kills',
+                                'Melee Final Blows',
+                                'Critical Hits',
+                                'Critical Hits per Minute',
+                                'Critical Hit Accuracy',
+                                'Eliminations per Life',
+                                'Weapon Accuracy',
+                                'Healing Done',
+                                'Teleporter Pads Destroyed',
+                                'Turrets Destroyed',
+                                'Eliminations - Most in Life',
+                                'Damage Done - Most in Life',
+                                'Healing Done - Most in Life',
+                                'Weapon Accuracy - Best in Game',
+                                'Kill Streak - Best',
+                                'Damage Done - Most in Game',
+                                'Healing Done - Most in Game',
+                                'Eliminations - Most in Game',
+                                'Final Blows - Most in Game',
+                                'Objective Kills - Most in Game',
+                                'Objective Time - Most in Game',
+                                'Solo Kills - Most in Game',
+                                'Critical Hits - Most in Game',
+                                'Critical Hits - Most in Life',
+                                'Melee Final Blows - Average',
+                                'Deaths - Average',
+                                'Solo Kills - Average',
+                                'Objective Time - Average',
+                                'Objective Kills - Average',
+                                'Healing Done - Average',
+                                'Final Blows - Average',
+                                'Eliminations - Average',
+                                'Damage Done - Average',
+                                'Deaths',
+                                'Environmental Deaths',
+                                'Medals - Bronze',
+                                'Medals - Silver',
+                                'Medals',
+                                'Medals',
+                                'Cards',
+                                'Time Played',
+                                'Games Played',
+                                'Games Won',
+                                'Objective Time',
+                                'Time Spent on Fire',
+                                'Win Percentage',
+                                'Multikill - Best',
+                                'Games Tied',
+                                'Games Lost'),
+                      'hanzo': ('SR',
+                                'Dragonstrike Kills',
+                                'Dragonstrike Kills - Most in Game',
+                                'Scatter Arrow Kills',
+                                'Scatter Arrow Kills - Most in Game',
+                                'Recon Assists - Most in Game',
+                                'Melee Final Blow - Most in Game',
+                                'Scatter Arrow Kills - Average',
+                                'Dragonstrike Kills - Average',
+                                'Eliminations',
+                                'Final Blows',
+                                'Solo Kills',
+                                'Shots Fired',
+                                'Shots Hit',
+                                'Critical Hits',
+                                'Damage Done',
+                                'Objective Kills',
+                                'Multikills',
+                                'Environmental Kills',
+                                'Melee Final Blows',
+                                'Critical Hits',
+                                'Critical Hits per Minute',
+                                'Critical Hit Accuracy',
+                                'Eliminations per Life',
+                                'Weapon Accuracy',
+                                'Teleporter Pads Destroyed',
+                                'Turrets Destroyed',
+                                'Eliminations - Most in Life',
+                                'Damage Done - Most in Life',
+                                'Weapon Accuracy - Best in Game',
+                                'Kill Streak - Best',
+                                'Damage Done - Most in Game',
+                                'Eliminations - Most in Game',
+                                'Final Blows - Most in Game',
+                                'Objective Kills - Most in Game',
+                                'Objective Time - Most in Game',
+                                'Solo Kills - Most in Game',
+                                'Critical Hits - Most in Game',
+                                'Critical Hits - Most in Life',
+                                'Melee Final Blows - Average',
+                                'Deaths - Average',
+                                'Solo Kills - Average',
+                                'Objective Time - Average',
+                                'Objective Kills - Average',
+                                'Final Blows - Average',
+                                'Eliminations - Average',
+                                'Damage Done - Average',
+                                'Deaths',
+                                'Environmental Deaths',
+                                'Medals - Bronze',
+                                'Medals - Silver',
+                                'Medals - Gold',
+                                'Medals',
+                                'Cards',
+                                'Time Played',
+                                'Games Played',
+                                'Games Won',
+                                'Objective Time',
+                                'Time Spent on Fire',
+                                'Win Percentage',
+                                'Multikill - Best',
+                                'Games Tied',
+                                'Games Lost'),
+                      'junkrat': ('SR',
+                                  'Enemies Trapped - Most in Game',
+                                  'Enemies Trapped',
+                                  'RIP-Tire Kills - Most in Game',
+                                  'RIP-Tire Kills',
+                                  'Melee Final Blow - Most in Game',
+                                  'Enemies Trapped a Minute',
+                                  'Eliminations',
+                                  'Final Blows',
+                                  'Solo Kills',
+                                  'Shots Fired',
+                                  'Shots Hit',
+                                  'Damage Done',
+                                  'Objective Kills',
+                                  'Multikills',
+                                  'Environmental Kills',
+                                  'Melee Final Blows',
+                                  'Eliminations per Life',
+                                  'Weapon Accuracy',
+                                  'Healing Done',
+                                  'Teleporter Pad Destroyed',
+                                  'Turrets Destroyed',
+                                  'Eliminations - Most in Life',
+                                  'Damage Done - Most in Life',
+                                  'Healing Done - Most in Life',
+                                  'Weapon Accuracy - Best in Game',
+                                  'Kill Streak - Best',
+                                  'Damage Done - Most in Game',
+                                  'Healing Done - Most in Game',
+                                  'Eliminations - Most in Game',
+                                  'Final Blows - Most in Game',
+                                  'Objective Kills - Most in Game',
+                                  'Objective Time - Most in Game',
+                                  'Solo Kills - Most in Game',
+                                  'Melee Final Blows - Average',
+                                  'Deaths - Average',
+                                  'Solo Kills - Average',
+                                  'Objective Time - Average',
+                                  'Objective Kills - Average',
+                                  'Healing Done - Average',
+                                  'Final Blows - Average',
+                                  'Eliminations - Average',
+                                  'Damage Done - Average',
+                                  'Deaths',
+                                  'Environmental Deaths',
+                                  'Medals - Bronze',
+                                  'Medals - Silver',
+                                  'Medals - Gold',
+                                  'Medals',
+                                  'Cards',
+                                  'Time Played',
+                                  'Games Played',
+                                  'Games Won',
+                                  'Objective Time',
+                                  'Time Spent on Fire',
+                                  'Win Percentage',
+                                  'Multikill - Best',
+                                  'Games Tied',
+                                  'Games Lost',
+                                  'RIP-Tire Kills - Average'),
+                      'lucio': ('SR',
+                                'Sound Barriers Provided',
+                                'Sound Barriers Provided - Most in Game',
+                                'Melee Final Blows - Most in Game',
+                                'Sound Barriers Provided - Average',
+                                'Eliminations',
+                                'Final Blows',
+                                'Solo Kills',
+                                'Shots Fired',
+                                'Shots Hit',
+                                'Critical Hits',
+                                'Damage Done',
+                                'Objective Kills',
+                                'Multikills',
+                                'Environmental Kills',
+                                'Melee Final Blows',
+                                'Critical Hits',
+                                'Critical Hits per Minute',
+                                'Critical Hit Accuracy',
+                                'Eliminations per Life',
+                                'Weapon Accuracy',
+                                'Healing Done',
+                                'Teleporter Pad Destroyed',
+                                'Turrets Destroyed',
+                                'Offensive Assists',
+                                'Self Healing',
+                                'Eliminations - Most in Life',
+                                'Damage Done - Most in Life',
+                                'Healing Done - Most in Life',
+                                'Weapon Accuracy - Best in Game',
+                                'Kill Streak - Best',
+                                'Damage Done - Most in Game',
+                                'Healing Done - Most in Game',
+                                'Eliminations - Most in Game',
+                                'Final Blows - Most in Game',
+                                'Objective Kills - Most in Game',
+                                'Objective Time - Most in Game',
+                                'Solo Kills - Most in Game',
+                                'Offensive Assists - Most in Game',
+                                'Critical Hits - Most in Game',
+                                'Critical Hits - Most in Life',
+                                'Self Healing - Most in Game',
+                                'Melee Final Blows - Average',
+                                'Self Healing - Average',
+                                'Offensive Assists - Average',
+                                'Deaths - Average',
+                                'Solo Kills - Average',
+                                'Objective Time - Average',
+                                'Objective Kills - Average',
+                                'Healing Done - Average',
+                                'Final Blows - Average',
+                                'Eliminations - Average',
+                                'Damage Done - Average',
+                                'Deaths',
+                                'Environmental Deaths',
+                                'Medals - Bronze',
+                                'Medals - Silver',
+                                'Medals - Gold',
+                                'Medals',
+                                'Cards',
+                                'Time Played',
+                                'Games Played',
+                                'Games Won',
+                                'Objective Time',
+                                'Time Spent on Fire',
+                                'Win Percentage',
+                                'Multikill - Best',
+                                'Defensive Assists',
+                                'Defensive Assists - Most in Game',
+                                'Healing Done',
+                                'Healing Done - Most in Game',
+                                'Games Tied',
+                                'Games Lost',
+                                'Healing Done - Average',
+                                'Defensive Assists - Average'),
+                      'mccree': ('SR',
+                                 'Deadeye Kills',
+                                 'Deadeye Kills - Most in Game',
+                                 'Fan the Hammer Kills',
+                                 'Melee Final Blow - Most in Game',
+                                 'Fan the Hammer Kills - Average',
+                                 'Deadeye Kills - Average',
+                                 'Eliminations',
+                                 'Final Blows',
+                                 'Solo Kills',
+                                 'Shots Fired',
+                                 'Shots Hit',
+                                 'Critical Hits',
+                                 'Damage Done',
+                                 'Objective Kills',
+                                 'Multikills',
+                                 'Environmental Kills',
+                                 'Melee Final Blows',
+                                 'Critical Hits',
+                                 'Critical Hits per Minute',
+                                 'Critical Hit Accuracy',
+                                 'Eliminations per Life',
+                                 'Weapon Accuracy',
+                                 'Healing Done',
+                                 'Teleporter Pads Destroyed',
+                                 'Turrets Destroyed',
+                                 'Eliminations - Most in Life',
+                                 'Damage Done - Most in Life',
+                                 'Weapon Accuracy - Best in Game',
+                                 'Kill Streak - Best',
+                                 'Damage Done - Most in Game',
+                                 'Eliminations - Most in Game',
+                                 'Final Blows - Most in Game',
+                                 'Objective Kills - Most in Game',
+                                 'Objective Time - Most in Game',
+                                 'Solo Kills - Most in Game',
+                                 'Critical Hits - Most in Game',
+                                 'Critical Hits - Most in Life',
+                                 'Melee Final Blows - Average',
+                                 'Deaths - Average',
+                                 'Solo Kills - Average',
+                                 'Objective Time - Average',
+                                 'Objective Kills - Average',
+                                 'Final Blows - Average',
+                                 'Eliminations - Average',
+                                 'Damage Done - Average',
+                                 'Deaths',
+                                 'Environmental Deaths',
+                                 'Medals - Bronze',
+                                 'Medals - Silver',
+                                 'Medals - Gold',
+                                 'Medals',
+                                 'Cards',
+                                 'Time Played',
+                                 'Games Played',
+                                 'Games Won',
+                                 'Objective Time',
+                                 'Time Spent on Fire',
+                                 'Win Percentage',
+                                 'Multikill - Best',
+                                 'Fan the Hammer Kills - Most in Game',
+                                 'Games Tied',
+                                 'Games Lost'),
+                      'mei': ('SR',
+                              'Enemies Frozen',
+                              'Enemies Frozen - Most in Game',
+                              'Blizzard Kills - Most in Game',
+                              'Blizzard Kills',
+                              'Damage Blocked - Most in Game',
+                              'Damage Blocked',
+                              'Melee Final Blows - Most in Game',
+                              'Enemies Frozen - Average',
+                              'Damage Blocked - Average',
+                              'Blizzard Kills - Average',
+                              'Eliminations',
+                              'Final Blows',
+                              'Solo Kills',
+                              'Shots Fired',
+                              'Shots Hit',
+                              'Critical Hits',
+                              'Damage Done',
+                              'Objective Kills',
+                              'Multikills',
+                              'Environmental Kills',
+                              'Melee Final Blows',
+                              'Critical Hits',
+                              'Critical Hits per Minute',
+                              'Critical Hit Accuracy',
+                              'Eliminations per Life',
+                              'Weapon Accuracy',
+                              'Healing Done',
+                              'Teleporter Pads Destroyed',
+                              'Turrets Destroyed',
+                              'Self Healing',
+                              'Eliminations - Most in Life',
+                              'Damage Done - Most in Life',
+                              'Healing Done - Most in Life',
+                              'Weapon Accuracy - Best in Game',
+                              'Kill Streak - Best',
+                              'Damage Done - Most in Game',
+                              'Healing Done - Most in Game',
+                              'Eliminations - Most in Game',
+                              'Final Blows - Most in Game',
+                              'Objective Kills - Most in Game',
+                              'Objective Time - Most in Game',
+                              'Solo Kills - Most in Game',
+                              'Critical Hits - Most in Game',
+                              'Critical Hits - Most in Life',
+                              'Self Healing - Most in Game',
+                              'Melee Final Blows - Average',
+                              'Self Healing - Average',
+                              'Deaths - Average',
+                              'Solo Kills - Average',
+                              'Objective Time - Average',
+                              'Objective Kills - Average',
+                              'Healing Done - Average',
+                              'Final Blows - Average',
+                              'Eliminations - Average',
+                              'Damage Done - Average',
+                              'Deaths',
+                              'Environmental Deaths',
+                              'Medals - Bronze',
+                              'Medals - Silver',
+                              'Medals - Gold',
+                              'Medals',
+                              'Cards',
+                              'Time Played',
+                              'Games Played',
+                              'Games Won',
+                              'Objective Time',
+                              'Time Spent on Fire',
+                              'Win Percentage',
+                              'Multikill - Best',
+                              'Games Tied',
+                              'Games Lost'),
+                      'mercy': ('SR',
+                                'Players Resurrected',
+                                'Players Resurrected - Most in Game',
+                                'Melee Final Blow - Most in Game',
+                                'Players Resurrected - Average',
+                                'Eliminations',
+                                'Final Blows',
+                                'Solo Kills',
+                                'Shots Fired',
+                                'Shots Hit',
+                                'Critical Hits',
+                                'Damage Done',
+                                'Objective Kills',
+                                'Multikills',
+                                'Environmental Kills',
+                                'Melee Final Blows',
+                                'Critical Hits',
+                                'Critical Hits per Minute',
+                                'Critical Hit Accuracy',
+                                'Eliminations per Life',
+                                'Weapon Accuracy',
+                                'Healing Done',
+                                'Teleporter Pad Destroyed',
+                                'Turrets Destroyed',
+                                'Offensive Assists',
+                                'Self Healing',
+                                'Eliminations - Most in Life',
+                                'Damage Done - Most in Life',
+                                'Healing Done - Most in Life',
+                                'Weapon Accuracy - Best in Game',
+                                'Kill Streak - Best',
+                                'Damage Done - Most in Game',
+                                'Healing Done - Most in Game',
+                                'Eliminations - Most in Game',
+                                'Final Blows - Most in Game',
+                                'Objective Kills - Most in Game',
+                                'Objective Time - Most in Game',
+                                'Solo Kills - Most in Game',
+                                'Offensive Assists - Most in Game',
+                                'Critical Hits - Most in Game',
+                                'Critical Hits - Most in Life',
+                                'Self Healing - Most in Game',
+                                'Melee Final Blows - Average',
+                                'Self Healing - Average',
+                                'Offensive Assists',
+                                'Deaths - Average',
+                                'Solo Kills - Average',
+                                'Objective Time - Average',
+                                'Objective Kills - Average',
+                                'Healing Done - Average',
+                                'Final Blows - Average',
+                                'Eliminations - Average',
+                                'Damage Done - Average',
+                                'Deaths',
+                                'Environmental Deaths',
+                                'Medals - Bronze',
+                                'Medals - Silver',
+                                'Medals - Gold',
+                                'Medals',
+                                'Cards',
+                                'Time Played',
+                                'Games Played',
+                                'Games Won',
+                                'Objective Time',
+                                'Time Spent on Fire',
+                                'Win Percentage',
+                                'Blaster Kills',
+                                'Blaster Kills - Most in Game',
+                                'Multikill - Best',
+                                'Defensive Assists',
+                                'Defensive Assists - Most in Game',
+                                'Healing Done',
+                                'Healing Done - Most in Game',
+                                'Games Tied',
+                                'Games Lost',
+                                'Healing Done - Average',
+                                'Defensive Assists - Average',
+                                'Blaster Kills - Average'),
+                      'pharah': ('SR',
+                                 'Rocket Direct Hits',
+                                 'Barrage Kills',
+                                 'Rocket Direct Hits - Most in Game',
+                                 'Barrage Kills - Most in Game',
+                                 'Melee Final Blows - Most in Game',
+                                 'Rocket Direct Hits - Average',
+                                 'Barrage Kills - Average',
+                                 'Eliminations',
+                                 'Final Blows',
+                                 'Solo Kills',
+                                 'Shots Fired',
+                                 'Shots Hit',
+                                 'Damage Done',
+                                 'Objective Kills',
+                                 'Multikills',
+                                 'Environmental Kills',
+                                 'Melee Final Blows',
+                                 'Eliminations per Life',
+                                 'Weapon Accuracy',
+                                 'Teleporter Pads Destroyed',
+                                 'Turrets Destroyed',
+                                 'Eliminations - Most in Life',
+                                 'Damage Done - Most in Life',
+                                 'Weapon Accuracy - Best in Game',
+                                 'Kill Streak - Best',
+                                 'Damage Done - Most in Game',
+                                 'Eliminations - Most in Game',
+                                 'Final Blows - Most in Game',
+                                 'Objective Kills - Most in Game',
+                                 'Objective Time - Most in Game',
+                                 'Solo Kills - Most in Game',
+                                 'Melee Final Blows',
+                                 'Deaths - Average',
+                                 'Solo Kills - Average',
+                                 'Objective Time - Average',
+                                 'Objective Kills - Average',
+                                 'Final Blows - Average',
+                                 'Eliminations - Average',
+                                 'Damage Done - Average',
+                                 'Deaths',
+                                 'Environmental Deaths',
+                                 'Medals - Bronze',
+                                 'Medals - Silver',
+                                 'Medals - Gold',
+                                 'Medals',
+                                 'Cards',
+                                 'Time Played',
+                                 'Games Played',
+                                 'Games Won',
+                                 'Objective Time',
+                                 'Time Spent on Fire',
+                                 'Win Percentage',
+                                 'Multikill - Best',
+                                 'Games Tied',
+                                 'Games Lost'),
+                      'reaper': ('SR',
+                                 'Souls Consumed',
+                                 'Death Blossom Kills',
+                                 'Souls Consumed - Most in Game',
+                                 'Death Blossom Kills - Most in Game',
+                                 'Melee Final Blows - Most in Game',
+                                 'Souls Consumed - Average',
+                                 'Death Blossom Kills - Average',
+                                 'Eliminations',
+                                 'Final Blows',
+                                 'Solo Kills',
+                                 'Shots Fired',
+                                 'Shots Hit',
+                                 'Critical Hits',
+                                 'Damage Done',
+                                 'Objective Kills',
+                                 'Multikills',
+                                 'Environmental Kills',
+                                 'Melee Final Blows',
+                                 'Critical Hits',
+                                 'Critical Hits per Minute',
+                                 'Critical Hit Accuracy',
+                                 'Eliminations per Life',
+                                 'Weapon Accuracy',
+                                 'Healing Done',
+                                 'Teleporter Pads Destroyed',
+                                 'Turrets Destroyed',
+                                 'Self Healing',
+                                 'Eliminations - Most in Life',
+                                 'Damage Done - Most in Life',
+                                 'Healing Done - Most in Life',
+                                 'Weapon Accuracy - Best in Game',
+                                 'Kill Streak - Best',
+                                 'Damage Done - Most in Game',
+                                 'Healing Done - Most in Game',
+                                 'Eliminations - Most in Game',
+                                 'Final Blows - Most in Game',
+                                 'Objective Kills - Most in Game',
+                                 'Objective Time - Most in Game',
+                                 'Solo Kills - Most in Game',
+                                 'Critical Hits - Most in Game',
+                                 'Critical Hits - Most in Life',
+                                 'Self Healing - Most in Game',
+                                 'Melee Final Blows - Average',
+                                 'Self Healing - Average',
+                                 'Deaths - Average',
+                                 'Solo Kills - Average',
+                                 'Objective Time - Average',
+                                 'Objective Kills - Average',
+                                 'Healing Done - Average',
+                                 'Final Blows - Average',
+                                 'Eliminations - Average',
+                                 'Damage Done - Average',
+                                 'Deaths',
+                                 'Environmental Deaths',
+                                 'Medals - Bronze',
+                                 'Medals - Silver',
+                                 'Medals - Gold',
+                                 'Medals',
+                                 'Cards',
+                                 'Time Played',
+                                 'Games Played',
+                                 'Games Won',
+                                 'Objective Time',
+                                 'Time Spent on Fire',
+                                 'Win Percentage',
+                                 'Multikill - Best',
+                                 'Games Tied',
+                                 'Games Lost'),
+                      'reinhardt': ('SR',
+                                    'Damage Blocked',
+                                    'Damage Blocked - Most in Game',
+                                    'Charge Kills',
+                                    'Charge Kills - Most in Game',
+                                    'Fire Strike Kills',
+                                    'Fire Strike Kills - Most in Game',
+                                    'Earthshatter Kills',
+                                    'Earthshatter Kills - Most in Game',
+                                    'Fire Strike Kills - Average',
+                                    'Earthshatter Kills - Average',
+                                    'Damage Blocked - Average',
+                                    'Charge Kills - Average',
+                                    'Eliminations',
+                                    'Final Blows',
+                                    'Solo Kills',
+                                    'Damage Done',
+                                    'Objective Kills',
+                                    'Multikills',
+                                    'Environmental Kills',
+                                    'Eliminations per Life',
+                                    'Teleporter Pads Destroyed',
+                                    'Turrets Destroyed',
+                                    'Eliminations - Most in Life',
+                                    'Damage Done - Most in Life',
+                                    'Kill Streak - Best',
+                                    'Damage Done - Most in Game',
+                                    'Eliminations - Most in Game',
+                                    'Final Blows - Most in Game',
+                                    'Objective Kills - Most in Game',
+                                    'Objective Time - Most in Game',
+                                    'Solo Kills - Most in Game',
+                                    'Deaths - Average',
+                                    'Solo Kills - Average',
+                                    'Objective Time - Average',
+                                    'Objective Kills - Average',
+                                    'Final Blows - Average',
+                                    'Eliminations - Average',
+                                    'Damage Done - Average',
+                                    'Deaths',
+                                    'Environmental Deaths',
+                                    'Medals - Bronze',
+                                    'Medals - Silver',
+                                    'Medals - Gold',
+                                    'Medals',
+                                    'Cards',
+                                    'Time Played',
+                                    'Games Played',
+                                    'Games Won',
+                                    'Objective Time',
+                                    'Time Spent on Fire',
+                                    'Win Percentage',
+                                    'Multikill - Best',
+                                    'Games Tied',
+                                    'Games Lost'),
+                      'roadhog': ('SR',
+                                  'Enemies Hooked - Most in Game',
+                                  'Enemies Hooked',
+                                  'Hooks Attempted',
+                                  'Whole Hog Kills - Most in Game',
+                                  'Whole Hog Kills',
+                                  'Hook Accuracy - Best in Game',
+                                  'Melee Final Blows - Most in Game',
+                                  'Whole Hog Kills - Average',
+                                  'Enemies Hooked - Average',
+                                  'Hook Accuracy',
+                                  'Eliminations',
+                                  'Final Blows',
+                                  'Solo Kills',
+                                  'Shots Fired',
+                                  'Shots Hit',
+                                  'Critical Hits',
+                                  'Damage Done',
+                                  'Objective Kills',
+                                  'Multikills',
+                                  'Environmental Kills',
+                                  'Melee Final Blows',
+                                  'Critical Hits',
+                                  'Critical Hits per Minute',
+                                  'Critical Hit Accuracy',
+                                  'Eliminations per Life',
+                                  'Weapon Accuracy',
+                                  'Healing Done',
+                                  'Teleporter Pads Destroyed',
+                                  'Turrets Destroyed',
+                                  'Self Healing',
+                                  'Eliminations - Most in Life',
+                                  'Damage Done - Most in Life',
+                                  'Healing Done - Most in Life',
+                                  'Weapon Accuracy - Best in Game',
+                                  'Kill Streak - Best',
+                                  'Damage Done - Most in Game',
+                                  'Healing Done - Most in Game',
+                                  'Eliminations - Most in Game',
+                                  'Final Blows - Most in Game',
+                                  'Objective Kills - Most in Game',
+                                  'Objective Time - Most in Game',
+                                  'Solo Kills - Most in Game',
+                                  'Critical Hits - Most in Game',
+                                  'Critical Hits - Most in Life',
+                                  'Self Healing - Most in Game',
+                                  'Melee Final Blows - Average',
+                                  'Self Healing - Average',
+                                  'Deaths - Average',
+                                  'Solo Kills - Average',
+                                  'Objective Time - Average',
+                                  'Objective Kills - Average',
+                                  'Healing Done - Average',
+                                  'Final Blows - Average',
+                                  'Eliminations - Average',
+                                  'Damage Done - Average',
+                                  'Deaths',
+                                  'Environmental Deaths',
+                                  'Medals - Bronze',
+                                  'Medals - Silver',
+                                  'Medals - Gold',
+                                  'Medals',
+                                  'Cards',
+                                  'Time Played',
+                                  'Games Played',
+                                  'Games Won',
+                                  'Objective Time',
+                                  'Time Spent on Fire',
+                                  'Win Percentage',
+                                  'Multikill - Best',
+                                  'Games Tied',
+                                  'Games Lost'),
+                      'soldier76': ('SR',
+                                    'Helix Rockets Kills - Most in Game',
+                                    'Helix Rockets Kills',
+                                    'Tactical Visor Kills',
+                                    'Tactical Visor Kills - Most in Game',
+                                    'Biotic Fields Deployed',
+                                    'Biotic Field Healing Done',
+                                    'Melee Final Blows - Most in Game',
+                                    'Tactical Visor Kills - Average',
+                                    'Helix Rockets Kills - Average',
+                                    'Eliminations',
+                                    'Final Blows',
+                                    'Solo Kills',
+                                    'Shots Fired',
+                                    'Shots Hit',
+                                    'Critical Hits',
+                                    'Damage Done',
+                                    'Objective Kills',
+                                    'Multikills',
+                                    'Environmental Kills',
+                                    'Melee Final Blows',
+                                    'Critical Hits',
+                                    'Critical Hits per Minute',
+                                    'Critical Hit Accuracy',
+                                    'Eliminations per Life',
+                                    'Weapon Accuracy',
+                                    'Healing Done',
+                                    'Teleporter Pads Destroyed',
+                                    'Turrets Destroyed',
+                                    'Self Healing',
+                                    'Eliminations - Most in Life',
+                                    'Damage Done - Most in Life',
+                                    'Healing Done - Most in Life',
+                                    'Weapon Accuracy - Best in Game',
+                                    'Kill Streak - Best',
+                                    'Damage Done - Most in Game',
+                                    'Healing Done - Most in Game',
+                                    'Eliminations - Most in Game',
+                                    'Final Blows - Most in Game',
+                                    'Objective Kills - Most in Game',
+                                    'Objective Time - Most in Game',
+                                    'Solo Kills - Most in Game',
+                                    'Critical Hits - Most in Game',
+                                    'Critical Hits - Most in Life',
+                                    'Self Healing - Most in Game',
+                                    'Melee Final Blows - Average',
+                                    'Self Healing - Average',
+                                    'Deaths - Average',
+                                    'Solo Kills - Average',
+                                    'Objective Time - Average',
+                                    'Objective Kills - Average',
+                                    'Healing Done - Average',
+                                    'Final Blows - Average',
+                                    'Eliminations - Average',
+                                    'Damage Done - Average',
+                                    'Deaths',
+                                    'Environmental Deaths',
+                                    'Medals - Bronze',
+                                    'Medals - Silver',
+                                    'Medals - Gold',
+                                    'Medals',
+                                    'Cards',
+                                    'Time Played',
+                                    'Games Played',
+                                    'Games Won',
+                                    'Objective Time',
+                                    'Time Spent on Fire',
+                                    'Win Percentage',
+                                    'Multikill - Best',
+                                    'Healing Done',
+                                    'Healing Done - Most in Game',
+                                    'Games Tied',
+                                    'Games Lost',
+                                    'Healing Done - Average'),
+                      'sombra': ('SR',
+                                 'Eliminations',
+                                 'Final Blows',
+                                 'Solo Kills',
+                                 'Shots Fired',
+                                 'Shots Hit',
+                                 'Critical Hits',
+                                 'Damage Done',
+                                 'Objective Kills',
+                                 'Multikills',
+                                 'Environmental Kills',
+                                 'Melee Final Blows',
+                                 'Eliminations per Life',
+                                 'Weapon Accuracy',
+                                 'Healing Done',
+                                 'Teleporter Pads Destroyed',
+                                 'Turrets Destroyed',
+                                 'Offensive Assists',
+                                 'Eliminations - Most in Life',
+                                 'Damage Done - Most in Life',
+                                 'Healing Done - Most in Life',
+                                 'Weapon Accuracy - Best in Game',
+                                 'Kill Streak - Best',
+                                 'Damage Done - Most in Game',
+                                 'Healing Done - Most in Game',
+                                 'Eliminations - Most in Game',
+                                 'Final Blows - Most in Game',
+                                 'Objective Kills - Most in Game',
+                                 'Objective Time - Most in Game',
+                                 'Solo Kills - Most in Game',
+                                 'Offensive Assists - Most in Game',
+                                 'Offensive Assists - Average',
+                                 'Deaths - Average',
+                                 'Solo Kills - Average',
+                                 'Objective Time - Average',
+                                 'Objective Kills - Average',
+                                 'Healing Done - Average',
+                                 'Final Blows - Average',
+                                 'Eliminations - Average',
+                                 'Damage Done - Average',
+                                 'Deaths',
+                                 'Environmental Deaths',
+                                 'Medals - Bronze',
+                                 'Medals - Silver',
+                                 'Medals - Gold',
+                                 'Medals',
+                                 'Cards',
+                                 'Time Played',
+                                 'Games Played',
+                                 'Games Won',
+                                 'Objective Time',
+                                 'Time Spent on Fire',
+                                 'Win Percentage',
+                                 'Enemies Hacked',
+                                 "Enemies EMP'd",
+                                 'Enemies Hacked - Most in Game',
+                                 "Enemies EMP'd - Most in Game | 27",
+                                 "Enemies EMP'd - Average",
+                                 'Enemies Hacked - Average',
+                                 'Multikill - Best',
+                                 'Games Tied',
+                                 'Games Lost'),
+                      'symmetra': ('SR',
+                                   'Sentry Turret Kills',
+                                   'Sentry Turret Kills - Most in Game',
+                                   'Players Teleported',
+                                   'Players Teleported - Most in Game',
+                                   'Shields Provided',
+                                   'Shields Provided - Most in Game',
+                                   'Teleporter Uptime',
+                                   'Teleporter Uptime - Best in Game',
+                                   'Shields Provided - Average',
+                                   'Sentry Turret Kills - Average',
+                                   'Players Teleported - Average',
+                                   'Teleporter Uptime - Average',
+                                   'Eliminations',
+                                   'Final Blows',
+                                   'Solo Kills',
+                                   'Damage Done',
+                                   'Objective Kills',
+                                   'Multikills',
+                                   'Environmental Kills',
+                                   'Eliminations per Life',
+                                   'Healing Done',
+                                   'Teleporter Pad Destroyed',
+                                   'Turrets Destroyed',
+                                   'Eliminations - Most in Life',
+                                   'Damage Done - Most in Life',
+                                   'Healing Done - Most in Life',
+                                   'Kill Streak - Best',
+                                   'Damage Done - Most in Game',
+                                   'Eliminations - Most in Game',
+                                   'Final Blows - Most in Game',
+                                   'Objective Kills - Most in Game',
+                                   'Objective Time - Most in Game',
+                                   'Solo Kills - Most in Game',
+                                   'Deaths - Average',
+                                   'Solo Kills - Average',
+                                   'Objective Time - Average',
+                                   'Objective Kills - Average',
+                                   'Healing Done - Average',
+                                   'Final Blows - Average',
+                                   'Eliminations - Average',
+                                   'Damage Done - Average',
+                                   'Deaths',
+                                   'Environmental Deaths',
+                                   'Medals - Bronze',
+                                   'Medals - Silver',
+                                   'Medals - Gold',
+                                   'Medals',
+                                   'Cards',
+                                   'Time Played',
+                                   'Games Played',
+                                   'Games Won',
+                                   'Objective Time',
+                                   'Time Spent on Fire',
+                                   'Win Percentage',
+                                   'Multikill - Best',
+                                   'Games Tied',
+                                   'Games Lost'),
+                      'torbjorn': ('SR',
+                                   'Armor Packs Created',
+                                   'Torbjörn Kills',
+                                   'Turret Kills',
+                                   'Torbjörn Kills - Most in Game',
+                                   'Molten Core Kills',
+                                   'Molten Core Kills - Most in Game',
+                                   'Melee Final Blows - Most in Game',
+                                   'Turret Kills - Average',
+                                   'Torbjörn Kills - Average',
+                                   'Molten Core Kills - Average',
+                                   'Armor Packs Created - Average',
+                                   'Eliminations',
+                                   'Final Blows',
+                                   'Solo Kills',
+                                   'Shots Fired',
+                                   'Shots Hit',
+                                   'Critical Hits',
+                                   'Damage Done',
+                                   'Objective Kills',
+                                   'Multikills',
+                                   'Environmental Kills',
+                                   'Melee Final Blows',
+                                   'Critical Hits',
+                                   'Critical Hits per Minute',
+                                   'Critical Hit Accuracy',
+                                   'Eliminations per Life',
+                                   'Weapon Accuracy',
+                                   'Healing Done',
+                                   'Teleporter Pads Destroyed',
+                                   'Turrets Destroyed',
+                                   'Eliminations - Most in Life',
+                                   'Damage Done - Most in Life',
+                                   'Weapon Accuracy - Best in Game',
+                                   'Kill Streak - Best',
+                                   'Damage Done - Most in Game',
+                                   'Eliminations - Most in Game',
+                                   'Final Blows - Most in Game',
+                                   'Objective Kills - Most in Game',
+                                   'Objective Time - Most in Game',
+                                   'Solo Kills - Most in Game',
+                                   'Critical Hits - Most in Game',
+                                   'Critical Hits - Most in Life',
+                                   'Melee Final Blows - Average',
+                                   'Deaths - Average',
+                                   'Solo Kills - Average',
+                                   'Objective Time - Average',
+                                   'Objective Kills - Average',
+                                   'Final Blows - Average',
+                                   'Eliminations - Average',
+                                   'Damage Done - Average',
+                                   'Deaths',
+                                   'Environmental Deaths',
+                                   'Medals - Bronze',
+                                   'Medals - Silver',
+                                   'Medals - Gold',
+                                   'Medals',
+                                   'Cards',
+                                   'Time Played',
+                                   'Games Played',
+                                   'Games Won',
+                                   'Objective Time',
+                                   'Time Spent on Fire',
+                                   'Win Percentage',
+                                   'Multikill - Best',
+                                   'Games Tied',
+                                   'Games Lost'),
+                      'tracer': ('SR',
+                                 'Pulse Bomb Kills',
+                                 'Pulse Bomb Kills - Most in Game',
+                                 'Pulse Bombs Attached - Most in Game',
+                                 'Pulse Bombs Attached',
+                                 'Melee Final Blows - Most in Game',
+                                 'Pulse Bomb Kills - Average',
+                                 'Pulse Bombs Attached - Average',
+                                 'Eliminations',
+                                 'Final Blows',
+                                 'Solo Kills',
+                                 'Shots Fired',
+                                 'Shots Hit',
+                                 'Critical Hits',
+                                 'Damage Done',
+                                 'Objective Kills',
+                                 'Multikills',
+                                 'Environmental Kill',
+                                 'Melee Final Blows',
+                                 'Critical Hits',
+                                 'Critical Hits per Minute',
+                                 'Critical Hit Accuracy',
+                                 'Eliminations per Life',
+                                 'Weapon Accuracy',
+                                 'Healing Done',
+                                 'Teleporter Pads Destroyed',
+                                 'Turrets Destroyed',
+                                 'Self Healing',
+                                 'Eliminations - Most in Life',
+                                 'Damage Done - Most in Life',
+                                 'Healing Done - Most in Life',
+                                 'Weapon Accuracy - Best in Game',
+                                 'Kill Streak - Best',
+                                 'Damage Done - Most in Game',
+                                 'Eliminations - Most in Game',
+                                 'Final Blows - Most in Game',
+                                 'Objective Kills - Most in Game',
+                                 'Objective Time - Most in Game',
+                                 'Solo Kills - Most in Game',
+                                 'Critical Hits - Most in Game',
+                                 'Critical Hits - Most in Life',
+                                 'Self Healing - Most in Game',
+                                 'Melee Final Blows - Average',
+                                 'Self Healing - Average',
+                                 'Deaths - Average',
+                                 'Solo Kills - Average',
+                                 'Objective Time - Average',
+                                 'Objective Kills - Average',
+                                 'Healing Done - Average',
+                                 'Final Blows - Average',
+                                 'Eliminations - Average',
+                                 'Damage Done - Average',
+                                 'Deaths',
+                                 'Environmental Deaths',
+                                 'Medals - Bronze',
+                                 'Medals - Silver',
+                                 'Medals - Gold',
+                                 'Medals',
+                                 'Cards',
+                                 'Time Played',
+                                 'Games Played',
+                                 'Games Won',
+                                 'Objective Time',
+                                 'Time Spent on Fire',
+                                 'Win Percentage',
+                                 'Multikill - Best',
+                                 'Games Tied',
+                                 'Games Lost'),
+                      'widowmaker': ('SR',
+                                     'Venom Mine Kills',
+                                     'Scoped Hits',
+                                     'Scoped Shots',
+                                     'Scoped Critical Hits',
+                                     'Scoped Critical Hits - Most in Game',
+                                     'Venom Mine Kills - Most in Game',
+                                     'Recon Assists - Most in Game',
+                                     'Scoped Accuracy - Best in Game',
+                                     'Melee Final Blows - Most in Game',
+                                     'Venom Mine Kills - Average',
+                                     'Scoped Critical Hits - Average',
+                                     'Scoped Accuracy',
+                                     'Eliminations',
+                                     'Final Blows',
+                                     'Solo Kills',
+                                     'Shots Fired',
+                                     'Shots Hit',
+                                     'Critical Hits',
+                                     'Damage Done',
+                                     'Objective Kills',
+                                     'Multikills',
+                                     'Environmental Kills',
+                                     'Melee Final Blows',
+                                     'Critical Hits',
+                                     'Critical Hits per Minute',
+                                     'Critical Hit Accuracy',
+                                     'Eliminations per Life',
+                                     'Weapon Accuracy',
+                                     'Healing Done',
+                                     'Teleporter Pads Destroyed',
+                                     'Turrets Destroyed',
+                                     'Eliminations - Most in Life',
+                                     'Damage Done - Most in Life',
+                                     'Healing Done - Most in Life',
+                                     'Weapon Accuracy - Best in Game',
+                                     'Kill Streak - Best',
+                                     'Damage Done - Most in Game',
+                                     'Healing Done - Most in Game',
+                                     'Eliminations - Most in Game',
+                                     'Final Blows - Most in Game',
+                                     'Objective Kills - Most in Game',
+                                     'Objective Time - Most in Game',
+                                     'Solo Kills - Most in Game',
+                                     'Critical Hits - Most in Game',
+                                     'Critical Hits - Most in Life',
+                                     'Melee Final Blows - Average',
+                                     'Deaths - Average',
+                                     'Solo Kills - Average',
+                                     'Objective Time - Average',
+                                     'Objective Kills - Average',
+                                     'Healing Done - Average',
+                                     'Final Blows - Average',
+                                     'Eliminations - Average',
+                                     'Damage Done - Average',
+                                     'Deaths',
+                                     'Environmental Deaths',
+                                     'Medals - Bronze',
+                                     'Medals - Silver',
+                                     'Medals - Gold',
+                                     'Medals',
+                                     'Cards',
+                                     'Time Played',
+                                     'Games Played',
+                                     'Games Won',
+                                     'Objective Time',
+                                     'Time Spent on Fire',
+                                     'Win Percentage',
+                                     'Games Tied',
+                                     'Games Lost'),
+                      'winston': ('SR',
+                                  'Players Knocked Back',
+                                  'Damage Blocked',
+                                  'Damage Blocked - Most in Game',
+                                  'Players Knocked Back - Most in Game',
+                                  'Melee Kills',
+                                  'Melee Kills - Most in Game',
+                                  'Jump Pack Kills',
+                                  'Jump Pack Kills - Most in Game',
+                                  'Melee Final Blows - Most in Game',
+                                  'Players Knocked Back - Average',
+                                  'Melee Kills - Average',
+                                  'Jump Pack Kills - Average',
+                                  'Damage Blocked - Average',
+                                  'Eliminations',
+                                  'Final Blows',
+                                  'Solo Kills',
+                                  'Damage Done',
+                                  'Objective Kills',
+                                  'Multikills',
+                                  'Environmental Kills',
+                                  'Melee Final Blows',
+                                  'Eliminations per Life',
+                                  'Healing Done',
+                                  'Teleporter Pad Destroyed',
+                                  'Turrets Destroyed',
+                                  'Eliminations - Most in Life',
+                                  'Damage Done - Most in Life',
+                                  'Healing Done - Most in Life',
+                                  'Kill Streak - Best',
+                                  'Damage Done - Most in Game',
+                                  'Healing Done - Most in Game',
+                                  'Eliminations - Most in Game',
+                                  'Final Blows - Most in Game',
+                                  'Objective Kills - Most in Game',
+                                  'Objective Time - Most in Game',
+                                  'Solo Kills - Most in Game',
+                                  'Melee Final Blows - Average',
+                                  'Deaths - Average',
+                                  'Solo Kills - Average',
+                                  'Objective Time - Average',
+                                  'Objective Kills - Average',
+                                  'Healing Done - Average',
+                                  'Final Blows - Average',
+                                  'Eliminations - Average',
+                                  'Damage Done - Average',
+                                  'Deaths',
+                                  'Environmental Deaths',
+                                  'Medals - Bronze',
+                                  'Medals - Silver',
+                                  'Medals - Gold',
+                                  'Medals',
+                                  'Cards',
+                                  'Time Played',
+                                  'Games Played',
+                                  'Games Won',
+                                  'Objective Time',
+                                  'Time Spent on Fire',
+                                  'Win Percentage',
+                                  'Multikill - Best',
+                                  'Primal Rage Kills',
+                                  'Primal Rage Kills - Most in Game',
+                                  'Games Tied',
+                                  'Games Lost',
+                                  'Primal Rage Kills  - Average'),
+                      'zarya': ('SR',
+                                'Damage Blocked',
+                                'Damage Blocked - Most in Game',
+                                'Lifetime Graviton Surge Kills',
+                                'Graviton Surge Kills - Most in Game',
+                                'High Energy Kills - Most in Game',
+                                'High Energy Kills',
+                                'Lifetime Energy Accumulation',
+                                'Energy Maximum',
+                                'Projected Barriers Applied',
+                                'Average Energy - Best in Game',
+                                'Melee Final Blows - Most in Game',
+                                'Projected Barriers Applied - Average',
+                                'High Energy Kills - Average',
+                                'Graviton Surge Kills - Average',
+                                'Damage Blocked - Average',
+                                'Lifetime Average Energy',
+                                'Eliminations',
+                                'Final Blows',
+                                'Solo Kills',
+                                'Shots Fired',
+                                'Shots Hit',
+                                'Damage Done',
+                                'Objective Kills',
+                                'Multikills',
+                                'Environmental Kills',
+                                'Melee Final Blows',
+                                'Eliminations per Life',
+                                'Weapon Accuracy',
+                                'Healing Done',
+                                'Teleporter Pads Destroyed',
+                                'Turrets Destroyed',
+                                'Eliminations - Most in Life',
+                                'Damage Done - Most in Life',
+                                'Healing Done - Most in Life',
+                                'Weapon Accuracy - Best in Game',
+                                'Kill Streak - Best',
+                                'Damage Done - Most in Game',
+                                'Healing Done - Most in Game',
+                                'Eliminations - Most in Game',
+                                'Final Blows - Most in Game',
+                                'Objective Kills - Most in Game',
+                                'Objective Time - Most in Game',
+                                'Solo Kills - Most in Game',
+                                'Melee Final Blows - Average',
+                                'Deaths - Average',
+                                'Solo Kills - Average',
+                                'Objective Time - Average',
+                                'Objective Kills - Average',
+                                'Healing Done - Average',
+                                'Final Blows - Average',
+                                'Eliminations - Average',
+                                'Damage Done - Average',
+                                'Deaths',
+                                'Environmental Deaths',
+                                'Medals - Bronze',
+                                'Medals - Silver',
+                                'Medals - Gold',
+                                'Medals',
+                                'Cards',
+                                'Time Played',
+                                'Games Played',
+                                'Games Won',
+                                'Objective Time',
+                                'Time Spent on Fire',
+                                'Win Percentage',
+                                'Multikill - Best',
+                                'Projected Barriers Applied - Most in Game',
+                                'Games Tied',
+                                'Games Lost'),
+                      'zenyatta': ('SR',
+                                   'Transcendence Healing - Best',
+                                   'Melee Final Blows - Most in Game',
+                                   'Eliminations',
+                                   'Final Blows',
+                                   'Solo Kills',
+                                   'Shots Fired',
+                                   'Shots Hit',
+                                   'Critical Hits',
+                                   'Damage Done',
+                                   'Objective Kills',
+                                   'Multikills',
+                                   'Environmental Kills',
+                                   'Melee Final Blows',
+                                   'Critical Hits',
+                                   'Critical Hits per Minute',
+                                   'Critical Hit Accuracy',
+                                   'Eliminations per Life',
+                                   'Weapon Accuracy',
+                                   'Healing Done',
+                                   'Teleporter Pads Destroyed',
+                                   'Turrets Destroyed',
+                                   'Offensive Assists',
+                                   'Self Healing',
+                                   'Eliminations - Most in Life',
+                                   'Damage Done - Most in Life',
+                                   'Healing Done - Most in Life',
+                                   'Weapon Accuracy - Best in Game',
+                                   'Kill Streak - Best',
+                                   'Damage Done - Most in Game',
+                                   'Healing Done - Most in Game',
+                                   'Eliminations - Most in Game',
+                                   'Final Blows - Most in Game',
+                                   'Objective Kills - Most in Game',
+                                   'Objective Time - Most in Game',
+                                   'Solo Kills - Most in Game',
+                                   'Offensive Assists - Most in Game',
+                                   'Critical Hits - Most in Game',
+                                   'Critical Hits - Most in Life',
+                                   'Self Healing - Most in Game',
+                                   'Melee Final Blows - Average',
+                                   'Self Healing - Average',
+                                   'Offensive Assists - Average',
+                                   'Deaths - Average',
+                                   'Solo Kills - Average',
+                                   'Objective Time - Average',
+                                   'Objective Kills - Average',
+                                   'Healing Done - Average',
+                                   'Final Blows - Average',
+                                   'Eliminations - Average',
+                                   'Damage Done - Average',
+                                   'Deaths',
+                                   'Environmental Deaths',
+                                   'Medals - Bronze',
+                                   'Medals - Silver',
+                                   'Medals - Gold',
+                                   'Medals',
+                                   'Cards',
+                                   'Time Played',
+                                   'Games Played',
+                                   'Games Won',
+                                   'Objective Time',
+                                   'Time Spent on Fire',
+                                   'Win Percentage',
+                                   'Multikill - Best',
+                                   'Transcendence Healing',
+                                   'Defensive Assists',
+                                   'Defensive Assists - Most in Game',
+                                   'Healing Done',
+                                   'Healing Done - Most in Game',
+                                   'Games Tied',
+                                   'Games Lost',
+                                   'Healing Done - Average',
+                                   'Defensive Assists - Average')}
 
 import codecs
 
@@ -24,222 +1584,225 @@ ENCODING = 'utf-8'
 
 
 def get_values(htmlText, handle):
+    rValues = list()
 
-    rValues =list()
+    FINDING_TRIGGER, COLLECTING_VAL, COLLECTING_HERO_MARKER, COLLECTING_HERO_ID = range(4)
+    HERO_MARKER = 'svg#0x02E0000000000'
 
-    FINDING_TRIGGER, COLLECTING_VAL, COLLECTING_HERO_MARKER, COLLECTING_HERO_ID =range(4)
-    HERO_MARKER ='svg#0x02E0000000000'
-
-    mode =FINDING_TRIGGER
-    currString =''
-    collectedMarker =''
-    markerIndex =0
-    currID =''
-    foundHandle =False
+    mode = FINDING_TRIGGER
+    currString = ''
+    collectedMarker = ''
+    markerIndex = 0
+    currID = ''
+    foundHandle = False
 
     for c in htmlText:
 
-        if FINDING_TRIGGER ==mode:
+        if FINDING_TRIGGER == mode:
             # value displayed on screen
-            if '>' ==c:
-                mode =COLLECTING_VAL
-                currString =''
-            
-            # possibly the HERO_MARKER
-            elif '.' ==c:
-                # else branch saves space
-                if foundHandle:
-                    mode =COLLECTING_HERO_MARKER
-                    collectedMarker =''
-                    markerIndex =0
+            if '>' == c:
+                mode = COLLECTING_VAL
+                currString = ''
 
-        elif COLLECTING_VAL ==mode:
-            # closes collected val
-            if '<' ==c:
-                mode =FINDING_TRIGGER
+            # possibly the HERO_MARKER
+            elif '.' == c:
                 # else branch saves space
                 if foundHandle:
-                    currString =currString.strip()
+                    mode = COLLECTING_HERO_MARKER
+                    collectedMarker = ''
+                    markerIndex = 0
+
+        elif COLLECTING_VAL == mode:
+            # closes collected val
+            if '<' == c:
+                mode = FINDING_TRIGGER
+                # else branch saves space
+                if foundHandle:
+                    currString = currString.strip()
                     # ignores blanks
-                    if len(currString) ==0:
+                    if len(currString) == 0:
                         continue
                     rValues.append(currString)
                     # skips following if
-                if handle ==currString:
-                    foundHandle =True
+                if handle == currString:
+                    foundHandle = True
                     rValues.append(currString)
             else:
-                currString +=c
+                currString += c
 
-        elif COLLECTING_HERO_MARKER ==mode:
+        elif COLLECTING_HERO_MARKER == mode:
             # matching the marker
-            if HERO_MARKER[markerIndex] ==c:
-                markerIndex +=1
+            if HERO_MARKER[markerIndex] == c:
+                markerIndex += 1
                 # last character trigger
-                if len(HERO_MARKER) ==markerIndex:
-                    mode =COLLECTING_HERO_ID
-                    currID =''
+                if len(HERO_MARKER) == markerIndex:
+                    mode = COLLECTING_HERO_ID
+                    currID = ''
 
             # sudden mismatch -> reset
             else:
-                mode =FINDING_TRIGGER
+                mode = FINDING_TRIGGER
 
-        elif COLLECTING_HERO_ID ==mode:
+        elif COLLECTING_HERO_ID == mode:
             # fill up the ID
-            currID +=c
+            currID += c
             # ID is two characters long
-            if len(currID) ==3:
+            if len(currID) == 3:
                 rValues.append('HeroID={0}'.format(currID))
-                mode =FINDING_TRIGGER
+                mode = FINDING_TRIGGER
 
     return rValues
 
+
 class PlayerNotFound(KeyError):
     def __init__(self, player):
-        message ='{0} has likely been deleted/banned; cannot retrieve'.format(player)
+        message = '{0} has likely been deleted/banned; cannot retrieve'.format(player)
         super(PlayerNotFound, self).__init__(message)
 
-SECTION_LABELS =['Hero Specific', 'Combat', 'Assists', 'Best', 'Average']
+
+SECTION_LABELS = ['Hero Specific', 'Combat', 'Assists', 'Best', 'Average']
 SECTION_LABELS.extend(['Deaths', 'Match Awards', 'Game', 'Miscellaneous'])
 
-SECTION_TO_INDEX =dict()
+SECTION_TO_INDEX = dict()
 for idx in range(len(SECTION_LABELS)):
-    SECTION_TO_INDEX[SECTION_LABELS[idx]] =idx
+    SECTION_TO_INDEX[SECTION_LABELS[idx]] = idx
 
-FINDING_QUICKPLAY, FINDING_HERO_DATA, READING_HEROES =range(3)
-HERO_DATA_MARKER ='Featured Stats'
-ENDING_MARKER ='Achievements'
+FINDING_QUICKPLAY, FINDING_HERO_DATA, READING_HEROES = range(3)
+HERO_DATA_MARKER = 'Featured Stats'
+ENDING_MARKER = 'Achievements'
+
+
 def get_player_bag(htmlText, handle):
-
-    valueList =get_values(htmlText, handle)
+    valueList = get_values(htmlText, handle)
     # handles deleted/banned
-    if 0 ==len(valueList):
+    if 0 == len(valueList):
         raise PlayerNotFound(handle)
 
-    quickplayBag =dict()
-    competitiveBag =dict()
-    playerBags =[quickplayBag, competitiveBag]
-    targetBag =quickplayBag
-    currSection =None
-    encounteredDeaths =False
-    heroID =None
+    quickplayBag = dict()
+    competitiveBag = dict()
+    playerBags = [quickplayBag, competitiveBag]
+    targetBag = quickplayBag
+    currSection = None
+    encounteredDeaths = False
+    heroID = None
     srRanking = 0
 
-    mode =FINDING_QUICKPLAY
-    valIdx =0
-    while valIdx <len(valueList):
+    mode = FINDING_QUICKPLAY
+    valIdx = 0
+    while valIdx < len(valueList):
 
-        val =valueList[valIdx]
+        val = valueList[valIdx]
 
-        if valIdx == 2:
+        if valIdx == 2 and len(val) == 4:
             srRanking = val
 
-        if FINDING_QUICKPLAY ==mode:
-            if HERO_DATA_MARKER ==val:
-                mode =FINDING_HERO_DATA
+        if FINDING_QUICKPLAY == mode:
+            if HERO_DATA_MARKER == val:
+                mode = FINDING_HERO_DATA
 
-            valIdx +=1
+            valIdx += 1
 
-        elif FINDING_HERO_DATA ==mode:
+        elif FINDING_HERO_DATA == mode:
             # denotes beginning of Competitive data
-            if HERO_DATA_MARKER ==val:
-                targetBag =competitiveBag
+            if HERO_DATA_MARKER == val:
+                targetBag = competitiveBag
 
             # denotes end of hero data
-            elif ENDING_MARKER ==val:
+            elif ENDING_MARKER == val:
                 break
 
             elif 'HeroID=' in val:
-                mode =READING_HEROES
-                heroID =val[-3:]
-                targetBag[heroID] =list()
+                mode = READING_HEROES
+                heroID = val[-3:]
+                targetBag[heroID] = list()
 
-            valIdx +=1
+            valIdx += 1
 
-        elif READING_HEROES ==mode:
+        elif READING_HEROES == mode:
             # denotes Competitive Section
-            if HERO_DATA_MARKER ==val:
-                targetBag =competitiveBag
-                mode =FINDING_HERO_DATA
+            if HERO_DATA_MARKER == val:
+                targetBag = competitiveBag
+                mode = FINDING_HERO_DATA
 
-                valIdx +=1
+                valIdx += 1
 
             # denotes end of all hero data
-            elif ENDING_MARKER ==val:
+            elif ENDING_MARKER == val:
                 break
 
             elif 'HeroID' in val:
-                heroID =val[-3:]
+                heroID = val[-3:]
                 targetBag[heroID] = list()
                 targetBag[heroID].append(('SR', srRanking))
-                valIdx +=1
+                valIdx += 1
 
             # could be section or value label
-            elif 'Deaths' ==val:
+            elif 'Deaths' == val:
                 # is a section
                 if not encounteredDeaths:
-                    encounteredDeaths =True
+                    encounteredDeaths = True
 
-                    thisSection =val
-                    thisSectionIndex =SECTION_TO_INDEX[thisSection]
+                    thisSection = val
+                    thisSectionIndex = SECTION_TO_INDEX[thisSection]
 
                     # first section
                     if not currSection:
-                        currSection =thisSection
+                        currSection = thisSection
 
-                        valIdx +=1
+                        valIdx += 1
                         continue
 
                     # indicates new hero
-                    currSectionIndex =SECTION_TO_INDEX[currSection]
-                    if thisSectionIndex <currSectionIndex:
-                        mode =FINDING_HERO_DATA
-                        currSection =thisSection
-                        encounteredDeaths =False
+                    currSectionIndex = SECTION_TO_INDEX[currSection]
+                    if thisSectionIndex < currSectionIndex:
+                        mode = FINDING_HERO_DATA
+                        currSection = thisSection
+                        encounteredDeaths = False
 
-                        valIdx +=1
+                        valIdx += 1
 
                     else:
-                        currSection =thisSection
+                        currSection = thisSection
 
-                        valIdx +=1
+                        valIdx += 1
 
                 # is a label
                 else:
-                    labelValue =(val, valueList[valIdx +1])
+                    labelValue = (val, valueList[valIdx + 1])
                     targetBag[heroID].append(labelValue)
 
-                    valIdx +=2
+                    valIdx += 2
 
             elif val in SECTION_LABELS:
-                thisSection =val
-                thisSectionIndex =SECTION_TO_INDEX[thisSection]
+                thisSection = val
+                thisSectionIndex = SECTION_TO_INDEX[thisSection]
 
                 # first section encountered
                 if not currSection:
-                    currSection =thisSection
-                    valIdx +=1
+                    currSection = thisSection
+                    valIdx += 1
                     continue
 
                 # indicates new hero
-                currSectionIndex =SECTION_TO_INDEX[currSection]
-                if thisSectionIndex <currSectionIndex:
-                    currSection =thisSection
-                    encounteredDeaths =False
+                currSectionIndex = SECTION_TO_INDEX[currSection]
+                if thisSectionIndex < currSectionIndex:
+                    currSection = thisSection
+                    encounteredDeaths = False
 
-                    valIdx +=1
+                    valIdx += 1
 
                 else:
-                    currSection =thisSection
+                    currSection = thisSection
 
-                    valIdx +=1
+                    valIdx += 1
             else:
-                labelValue =(val, valueList[valIdx +1])
+                labelValue = (val, valueList[valIdx + 1])
                 targetBag[heroID].append(labelValue)
 
-                valIdx +=2
+                valIdx += 2
 
     return playerBags
+
 
 import requests
 
@@ -271,25 +1834,39 @@ def main(username, platform, region, export_file):
 
     r = requests.get(url)
     html_text = r.text
-    heroes = {'040': 'roadhog', '002': 'reaper', '003': 'tracer', '004': 'mercy', '005': 'hanzo', '006': 'torbjorn', '007': 'reinhardt', '008': 'pharah', '009': 'winston', '00A': 'widowmaker', '015': 'bastion',
-              '016': 'symmetra', '020': 'zenyatta', '029': 'genji', '042': 'mccree', '065': 'junkrat', '068': 'zarya', '06E': 'soldier76', '079': 'lucio', '07A': 'd.va', '0DD': 'mei', '13B': 'ana'}
+    heroes = {'040': 'roadhog', '002': 'reaper', '003': 'tracer', '004': 'mercy', '005': 'hanzo', '006': 'torbjorn',
+              '007': 'reinhardt', '008': 'pharah', '009': 'winston', '00A': 'widowmaker', '015': 'bastion',
+              '016': 'symmetra', '020': 'zenyatta', '029': 'genji', '042': 'mccree', '065': 'junkrat', '068': 'zarya',
+              '06E': 'soldier76', '079': 'lucio', '07A': 'd.va', '0DD': 'mei', '13B': 'ana', '12E': 'sombra'}
     try:
 
         player_bags = get_player_bag(html_text, name)
 
-
         for hero in player_bags[1]:
+            hero_stats = ALL_HERO_STATS[heroes[hero]]
             export = export_file + heroes[hero] + '_results'
 
             write_results = open(export, 'a')
-            write_results.write(username + '\n')
+            write_results.write(username + ';')
 
+            stat_position = 0
             for label, val in player_bags[1][hero]:
-                write_results.write('\t\t{0} | {1}'.format(label, val) + '\n')
-            write_results.write('-----------------\n')
+                empty_spaces = ''
+                counting_missing = stat_position
+                while(counting_missing < len(hero_stats) and label != hero_stats[counting_missing]):
+                    empty_spaces += ';'
+                    counting_missing += 1
+                if(counting_missing < len(hero_stats)):
+                    write_results.write(empty_spaces)
+                    stat_position += len(empty_spaces)
+                    write_results.write('{0}'.format(val) + ';')
+                    stat_position += 1
+            write_results.write('\n')
             write_results.close()
     except IndexError:
-            print('Player not found:' + username + " " + platform + " " + region)
+        print('Player not found:' + username + " " + platform + " " + region)
+
+
 # ---
 
 def complain(prob_string):
@@ -300,13 +1877,25 @@ def complain(prob_string):
 # handle different platforms
 import sys
 
+
 def clearFiles():
     consoles = {'pc', 'psn', 'xbl'}
-    heroes = {'ana', 'bastion', 'd.va', 'genji', 'hanzo', 'lucio', 'mccree', 'mei', 'mercy', 'pharah', 'reaper', 'reinhardt', 'roadhog', 'soldier76', 'sombra', 'tracer', 'winston', 'widowmaker', 'zarya', 'zenyatta'}
+    heroes = {'ana', 'bastion', 'd.va', 'genji', 'hanzo', 'junkrat', 'lucio', 'mccree', 'mei', 'mercy', 'pharah',
+              'reaper', 'reinhardt', 'roadhog', 'soldier76', 'sombra', 'symmetra', 'torbjorn', 'tracer', 'widowmaker',
+              'winston', 'zarya', 'zenyatta'}
 
     for console in consoles:
         for hero in heroes:
             open('res/competitive/' + console + '/' + hero + '_results', 'w').close()
+            write_labels = open('res/competitive/' + console + '/' + hero + '_results', 'a')
+            hero_stats = ALL_HERO_STATS[hero]
+            write_labels.write('Username;')
+            for stat in hero_stats:
+                write_labels.write(stat + ';')
+            write_labels.write('\n')
+            write_labels.close()
+
+
 
 if __name__ == '__main__':
 
@@ -326,7 +1915,6 @@ if __name__ == '__main__':
             main(line.strip('\n'), 'PC', 'US', 'res/competitive/pc/')
         except:
             pass
-
 
     pc_kr_file = open('res/pc_kr.txt', 'r')
     for line in pc_kr_file:
