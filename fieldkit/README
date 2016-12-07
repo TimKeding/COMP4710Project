@@ -1,0 +1,48 @@
+to get a ALL_HERO_STATS dict in the format
+
+    reaper
+        [   death blossom kills,
+            souls consumed,
+            ... ]
+
+    ana
+        [   biotic grenade kills,
+            nano boosts applied,
+            ... ]
+
+    ...
+
+    use this:
+
+        from fieldkit.fieldkit import FieldKeeper
+        ALL_HERO_STATS =FieldKeeper.getAllHeroStats
+
+whenever you try to use a field you find:
+
+    for f in fields:
+        # --- use f --- #
+
+    use this:
+
+        for f in fields:
+
+            f =FieldKeeper.getLibraryForm(f, heroKey)
+            # --- use f --- #
+
+        ---
+
+        this will turn
+
+            Card
+            -> Cards
+
+            Turret Destroyed
+            -> Turrets Destroyed
+
+            etc
+
+        ---
+
+        so fields used will be as accurate as possible
+        for accurate mining
+
