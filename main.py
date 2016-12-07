@@ -1,3 +1,11 @@
+import pandas as pd
+import numpy as np
+from sklearn.cluster import DBSCAN
+from sklearn import metrics
+from sklearn.datasets.samples_generator import make_blobs
+from sklearn.preprocessing import StandardScaler
+import matplotlib.pyplot as plt
+
 class Constant_Maker:
     def __init__(self, seed):
         self.curr_id = seed
@@ -308,44 +316,81 @@ def clearFiles():
         for hero in heroes:
             open('res/competitive/' + console + '/' + hero + '_results', 'w').close()
 
+def performClustering():
+    raw_data = 'out/us_ana'
+    dataset = pd.read_csv(raw_data, delimiter=';', header=1, usecols=(*range(1, 55), *range(64, 75)))
+
+    dataset = np.nan_to_num(dataset)
+    dataset = StandardScaler().fit_transform(dataset)
+
+
+
+    db = DBSCAN(eps=10, min_samples=200, algorithm='auto').fit(dataset)
+    core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
+    core_samples_mask[db.core_sample_indices_] = True
+    labels = db.labels_
+
+    # Number of clusters in labels, ignoring noise if present.
+    n_clusters_ = len(set(labels)) - (1 if -1 in labels else 0)
+
+    unique_labels = set(labels)
+    colors = plt.cm.Spectral(np.linspace(0, 1, len(unique_labels)))
+    for k, col in zip(unique_labels, colors):
+        if k == -1:
+            # Black used for noise.
+            col = 'k'
+
+        class_member_mask = (labels == k)
+
+        xy = dataset[class_member_mask & core_samples_mask]
+        plt.plot(xy[:, 0], xy[:, 55], 'o', markerfacecolor=col,
+                 markeredgecolor='k', markersize=14)
+
+        xy = dataset[class_member_mask & ~core_samples_mask]
+        plt.plot(xy[:, 0], xy[:, 55], 'o', markerfacecolor=col,
+                 markeredgecolor='k', markersize=6)
+
+    plt.title('Estimated number of clusters: %d' % n_clusters_)
+    plt.show()
 
 if __name__ == '__main__':
 
-    clearFiles()
-
-    pc_us_file = open('res/pc_us.txt', 'r')
-    for line in pc_us_file:
-        try:
-            main(line.strip('\n'), 'PC', 'US', 'res/competitive/pc/')
-        except:
-            pass
-    pc_us_file.close()
-
-    pc_eu_file = open('res/pc_eu.txt', 'r')
-    for line in pc_eu_file:
-        try:
-            main(line.strip('\n'), 'PC', 'US', 'res/competitive/pc/')
-        except:
-            pass
-
-
-    pc_kr_file = open('res/pc_kr.txt', 'r')
-    for line in pc_kr_file:
-        try:
-            main(line.strip('\n'), 'PC', 'US', 'res/competitive/pc/')
-        except:
-            pass
-
-    xbl_file = open('res/xbl.txt', 'r')
-    for line in xbl_file:
-        try:
-            main(line.strip('\n'), 'XBL', None, 'res/competitive/xbl/')
-        except:
-            pass
-
-    psn_file = open('res/psn.txt', 'r')
-    for line in psn_file:
-        try:
-            main(line.strip('\n'), 'PSN', None, 'res/competitive/psn/')
-        except:
-            pass
+    performClustering()
+    # clearFiles()
+    #
+    # pc_us_file = open('res/pc_us.txt', 'r')
+    # for line in pc_us_file:
+    #     try:
+    #         main(line.strip('\n'), 'PC', 'US', 'res/competitive/pc/')
+    #     except:
+    #         pass
+    # pc_us_file.close()
+    #
+    # pc_eu_file = open('res/pc_eu.txt', 'r')
+    # for line in pc_eu_file:
+    #     try:
+    #         main(line.strip('\n'), 'PC', 'US', 'res/competitive/pc/')
+    #     except:
+    #         pass
+    #
+    #
+    # pc_kr_file = open('res/pc_kr.txt', 'r')
+    # for line in pc_kr_file:
+    #     try:
+    #         main(line.strip('\n'), 'PC', 'US', 'res/competitive/pc/')
+    #     except:
+    #         pass
+    #
+    # xbl_file = open('res/xbl.txt', 'r')
+    # for line in xbl_file:
+    #     try:
+    #         main(line.strip('\n'), 'XBL', None, 'res/competitive/xbl/')
+    #     except:
+    #         pass
+    #
+    # psn_file = open('res/psn.txt', 'r')
+    # for line in psn_file:
+    #     try:
+    #         main(line.strip('\n'), 'PSN', None, 'res/competitive/psn/')
+    #     except:
+    #         pass
