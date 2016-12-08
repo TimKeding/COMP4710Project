@@ -1,0 +1,30 @@
+arrayplay usage
+
+    python arrayplay.py out/us_ana out/kr_ana out/eu_ana out/psn_ana out/xbl_ana
+
+    there's a guard that the arguments are all about the same hero
+    and there are no repeated files
+
+    also, hardcoded on lines 87-92 are the options for the clustering
+
+        NUM_IDOL_CLUSTERS is the number of highperformance clusters to highlight
+
+        MIN_IDOL_CLUSTER_SIZE is the minimum size a cluster must be before it is
+            even considered in becoming highlighted as high performance
+
+        TARGET_IDX should be set to either WINRATE_IDX or SR_IDX
+
+        TARGET_HERO should match the hero that you're providing as file input
+
+!!!
+!!!
+---
+WARNING
+---
+!!!
+!!!
+
+    This will create 80-ish pyplot graphs simultaneously ( the number matches the number of dimensions )
+
+    if you have low memory, save stuff to disk before continuing
+
