@@ -1,3 +1,15 @@
+res directory
+
+    within the top directory, player lists can be found
+
+out directory
+
+    files in here are used by arrayplay.py to mine with
+
+    format is
+
+        {platform/region}_{heroname}
+
 genData usage
 
     python genData.py res/pc_eu.txt PC EU throw/eu
@@ -49,6 +61,10 @@ WARNING
 ---
 !!!
 !!!
+
+    if run sequentially, genData will take a couple of hours
+    if multiple instances of genData are run on different input files
+        the time can be lessened
 
     arrayplay.py will create 80-ish pyplot graphs simultaneously
     ( the number matches the number of dimensions )
