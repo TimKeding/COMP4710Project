@@ -1,8 +1,34 @@
+genData usage
+
+    python genData.py res/pc_eu.txt PC EU throw/eu
+
+        res/pc_eu.txt
+        - the source file
+        - this is a file consisting of a list of Overwatch player usernames
+
+        PC EU | PSN | XBL
+        - query paramenters
+        - if two are given, the script will query the server for pc users
+                based with the provided region
+        - if one is given, the script will query the server for console users
+
+        throw/eu
+        - output prefix
+        - this is the prefix that output data files have
+        - the resulting output can be found in the throw directory
+                in the format eu_{heroname}
+
+    this generates a dataset that can be given to arrayplay.py to mine and plot with
+
+    multiple instances of this can be run simultaneously on differing source files
+
 arrayplay usage
 
     python arrayplay.py out/us_ana out/kr_ana out/eu_ana out/psn_ana out/xbl_ana
 
-    there's a guard that the arguments are all about the same hero
+    this program takes a list of input files to process, mine, and visually present
+
+    there's a restriction that the arguments are all about the same hero
     and there are no repeated files
 
     also, hardcoded on lines 87-92 are the options for the clustering
@@ -24,7 +50,8 @@ WARNING
 !!!
 !!!
 
-    This will create 80-ish pyplot graphs simultaneously ( the number matches the number of dimensions )
+    arrayplay.py will create 80-ish pyplot graphs simultaneously
+    ( the number matches the number of dimensions )
 
     if you have low memory, save stuff to disk before continuing
 
